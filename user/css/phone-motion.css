@@ -1,0 +1,55 @@
+/* =========================================================
+   PHONE MOTION — gestur mengikuti jari + scroll halus.
+   Muat PALING AKHIR (setelah iphone-device.css / home-ios.css).
+   ========================================================= */
+
+/* ---------- saat digeser jari: tanpa transition, hanya transform ---------- */
+.phone .app.is-dragging,
+.phone .sheet.is-dragging { transition: none !important; }
+.phone.is-gesturing #view-home .hs { transition: none; }
+
+.phone .app { transform-origin: 50% 55%; will-change: transform, opacity; }
+.phone .sheet { will-change: transform; }
+
+/* scrim ikut memudar saat sheet ditarik */
+.phone .sheet-scrim { transition: opacity .25s ease; }
+
+/* home screen perlahan "terbuka" mengikuti seberapa jauh app digeser */
+.phone #view-home.is-covered .hs {
+  transform: scale(calc(.94 + .06 * var(--drag, 0)));
+  filter: blur(calc(4px * (1 - var(--drag, 0))));
+}
+
+/* ---------- area sentuh gestur ---------- */
+.phone .phone__home,
+.phone .statusbar__zone,
+.phone .phone__edge,
+.phone .sheet__grab { touch-action: none; }
+.phone .phone__home::before { content: ""; position: absolute; inset: -18px 0 0; } /* area geser lebih tinggi */
+
+/* control center tidak scroll: seluruh sheet boleh digeser; notifikasi tetap bisa di-scroll vertikal */
+.phone .sheet--control { touch-action: none; }
+.phone .sheet--notif .sheet__body { touch-action: pan-y; }
+.phone .sheet__grab { min-height: 48px; }
+
+/* ---------- scroll halus ---------- */
+.phone .app,
+.phone .sheet__body,
+.phone .conv__scroll,
+.phone .notes__list,
+.phone .notes__detail,
+.phone .wa__list,
+.phone .gallery-body,
+.phone .x-body,
+.phone .ios-cal-scroll {
+  scroll-behavior: smooth;                 /* scrollTo / scrollIntoView */
+  -webkit-overflow-scrolling: touch;       /* momentum di iOS */
+  overscroll-behavior: contain;            /* tidak "bocor" ke halaman di belakang */
+  scrollbar-width: none;
+}
+.phone .app::-webkit-scrollbar,
+.phone .sheet__body::-webkit-scrollbar { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .phone .app, .phone .sheet__body, .phone .conv__scroll { scroll-behavior: auto; }
+}

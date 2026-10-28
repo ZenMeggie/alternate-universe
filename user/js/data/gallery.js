@@ -1,0 +1,41 @@
+
+export const gallery = [
+  {
+    id: "g-eve-museum",
+    characterId: "eve",
+    image: "assets/photos/the_kiss.png",
+    alt: "Eve mengamati lukisan The Kiss di museum",
+    caption: "Sore di museum",
+    date: "2026-10-21",
+    timestamp: "2026-10-21T16:42:00+07:00",
+    latitude: -6.9175,
+    longitude: 107.6191,
+    locationName: "Museum di Bandung",
+    photographerId: null,
+    people: ["eve", "bia"],
+    activity: "Kunjungan museum",
+    context:
+      "Eve sedang mengamati The Kiss ketika seorang pengunjung di dekatnya ikut mengomentari lukisan tersebut.",
+    narrationId: "nar-museum-eve",
+    eventId: "ev-museum",
+  },
+  {
+    id: "g-bia-museum",
+    characterId: "bia",
+    image: "assets/photos/the_kiss.png",
+    alt: "Lukisan The Kiss yang diamati Bianca di museum",
+    caption: "Sore di museum",
+    date: "2026-10-21",
+    timestamp: "2026-10-21T16:42:00+07:00",
+    latitude: -6.9175,
+    longitude: 107.6191,
+    locationName: "Museum di Bandung",
+    photographerId: null,
+    people: ["eve", "bia"],
+    activity: "Kunjungan museum",
+    context:
+      "Bianca sedang mengamati The Kiss ketika percakapan singkat dengan pengunjung lain menarik perhatiannya.",
+    narrationId: "nar-museum-bia",
+    eventId: "ev-museum",
+  },
+];

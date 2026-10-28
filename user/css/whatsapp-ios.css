@@ -1,0 +1,115 @@
+/* WhatsApp gaya iOS, mode terang. Semua di-scope ke .app--whatsapp. */
+.phone .app--whatsapp {
+  overflow: hidden;
+  background: #fff;
+  color: #000;
+  font-family: var(--ios-font);
+}
+.app--whatsapp .wi { height: 100%; display: flex; flex-direction: column; min-height: 0; background: #fff; }
+.app--whatsapp .wi svg { display: block; flex: 0 0 auto; }
+
+/* bar atas */
+.app--whatsapp .wi-top { flex: 0 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 8px 16px 4px; color: #007aff; }
+.app--whatsapp .wi-edit { font-size: 17px; }
+.app--whatsapp .wi-icons { display: flex; gap: 22px; }
+
+/* area scroll */
+.app--whatsapp .wi-scroll { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none; }
+.app--whatsapp .wi-scroll::-webkit-scrollbar { display: none; }
+.app--whatsapp .wi-title { margin: 6px 16px 8px; font-size: 34px; font-weight: 700; letter-spacing: -.02em; }
+.app--whatsapp .wi-search { display: flex; align-items: center; gap: 6px; margin: 0 16px 10px; padding: 8px 10px; border-radius: 10px; background: rgba(118,118,128,.12); color: #8e8e93; font-size: 16px; }
+.app--whatsapp .wi-links { display: flex; justify-content: space-between; padding: 4px 16px 10px; color: #007aff; font-size: 17px; border-bottom: .5px solid #d1d1d6; }
+.app--whatsapp .wi-label { margin: 6px 16px 8px; color: #6b6b72; font-size: 13px; text-transform: uppercase; }
+
+/* baris chat / call */
+.app--whatsapp .wi-list { list-style: none; margin: 0; padding: 0; }
+.app--whatsapp .wi-row { display: flex; align-items: center; gap: 12px; width: 100%; padding: 0 0 0 16px; border: 0; background: none; text-align: left; cursor: pointer; font: inherit; color: inherit; }
+.app--whatsapp .wi-row:active { background: #e5e5ea; }
+.app--whatsapp .wi-row .avatar { flex: 0 0 auto; }
+.app--whatsapp .wi-row__body { flex: 1; min-width: 0; display: grid; gap: 2px; padding: 11px 16px 11px 0; border-bottom: .5px solid #e1e1e6; }
+.app--whatsapp .wi-list li:last-child .wi-row__body { border-bottom: 0; }
+.app--whatsapp .wi-row__top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.app--whatsapp .wi-row__top strong { font-size: 17px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.app--whatsapp .wi-row__top time { flex: 0 0 auto; color: #8e8e93; font-size: 14px; }
+.app--whatsapp .wi-row__sub { display: flex; align-items: center; gap: 4px; color: #8e8e93; font-size: 15px; line-height: 1.3; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.app--whatsapp .wi-row__sub svg { flex: 0 0 auto; }
+.app--whatsapp .is-missed { color: #ff3b30 !important; }
+
+/* centang biru */
+.app--whatsapp .ticks { color: #53bdeb; flex: 0 0 auto; }
+
+/* tab bawah */
+.app--whatsapp .wi-tabs { flex: 0 0 auto; display: flex; padding: 6px 0 4px; background: rgba(249,249,249,.94); border-top: .5px solid #d1d1d6; }
+.app--whatsapp .wi-tab { flex: 1; display: grid; justify-items: center; gap: 2px; border: 0; background: none; color: #8e8e93; font: 500 10px var(--ios-font); cursor: pointer; padding: 2px 0; }
+.app--whatsapp .wi-tab.is-on { color: #007aff; }
+.app--whatsapp .wi-tab.is-on svg { stroke-width: 2.2; }
+
+/* settings: ganti akun */
+.app--whatsapp .wi-accounts { list-style: none; margin: 0 16px 20px; padding: 0; border-radius: 12px; overflow: hidden; background: #f2f2f7; }
+.app--whatsapp .wi-accounts li + li { border-top: .5px solid #d1d1d6; }
+.app--whatsapp .wi-account { display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px 14px; border: 0; background: none; text-align: left; cursor: pointer; font: inherit; color: inherit; }
+.app--whatsapp .wi-account span:not(.wi-account__check) { flex: 1; display: grid; gap: 1px; min-width: 0; }
+.app--whatsapp .wi-account strong { font-size: 17px; font-weight: 500; }
+.app--whatsapp .wi-account small { color: #8e8e93; font-size: 13px; }
+.app--whatsapp .wi-account__check { color: #007aff; }
+
+/* ---------- percakapan ---------- */
+.app--whatsapp .wi-head { flex: 0 0 auto; display: flex; align-items: center; gap: 4px; padding: 4px 14px 6px 4px; background: #f6f6f6; border-bottom: .5px solid #d1d1d6; color: #007aff; }
+.app--whatsapp .wi-back { border: 0; background: none; color: #007aff; padding: 4px 2px; cursor: pointer; }
+.app--whatsapp .wi-contact { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; border: 0; background: none; padding: 0; text-align: left; cursor: pointer; font: inherit; color: #000; }
+.app--whatsapp .wi-contact span { display: grid; gap: 1px; min-width: 0; }
+.app--whatsapp .wi-contact strong { font-size: 16px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.app--whatsapp .wi-contact small { color: #8e8e93; font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.app--whatsapp .wi-head__icons { display: flex; gap: 20px; }
+
+.app--whatsapp .wi-chat {
+  flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none;
+  padding: 8px 10px 10px;
+  background-color: #efeae2;
+  background-image: radial-gradient(rgba(0,0,0,.045) 1.2px, transparent 1.4px);
+  background-size: 22px 22px;
+}
+.app--whatsapp .wi-chat::-webkit-scrollbar { display: none; }
+
+.app--whatsapp .wi-day { display: flex; justify-content: center; margin: 10px 0 6px; }
+.app--whatsapp .wi-day span { padding: 4px 10px; border-radius: 8px; background: #fff; color: #54656f; font-size: 12px; box-shadow: 0 1px .5px rgba(0,0,0,.12); }
+
+.app--whatsapp .wi-msg { display: flex; margin: 2px 0; }
+.app--whatsapp .wi-msg--out { justify-content: flex-end; }
+.app--whatsapp .wi-bubble { position: relative; max-width: 82%; padding: 6px 8px 5px 9px; border-radius: 9px; background: #fff; box-shadow: 0 1px .5px rgba(0,0,0,.13); font-size: 15.5px; line-height: 1.32; overflow-wrap: anywhere; }
+.app--whatsapp .wi-msg--out .wi-bubble { background: #d9fdd3; }
+.app--whatsapp .wi-bubble::after { content: ""; display: block; clear: both; }
+.app--whatsapp .wi-name { display: block; margin-bottom: 1px; font-size: 13px; font-weight: 600; }
+.app--whatsapp .wi-text { margin: 0; white-space: pre-wrap; }
+.app--whatsapp .wi-meta { float: right; display: inline-flex; align-items: center; gap: 3px; margin: 6px 0 -2px 10px; color: #667781; font-size: 11px; }
+.app--whatsapp .wi-meta time { font-variant-numeric: tabular-nums; }
+.app--whatsapp .wi-narr { display: grid; place-items: center; border: 0; background: none; color: #007aff; padding: 0; cursor: pointer; }
+
+/* stiker tanpa bubble */
+.app--whatsapp .wi-msg--sticker .wi-bubble { background: none; box-shadow: none; padding: 0; }
+.app--whatsapp .wi-msg--sticker .wi-meta { margin: 0; padding: 2px 6px; border-radius: 10px; background: rgba(0,0,0,.35); color: #fff; }
+.app--whatsapp .wi-msg--sticker .wi-meta .ticks { color: #fff; }
+.app--whatsapp .wi-sticker { display: block; width: 130px; height: 130px; object-fit: contain; }
+
+/* bubble panggilan */
+.app--whatsapp .wi-callrow { display: flex; align-items: center; gap: 10px; min-width: 190px; padding: 2px 0; }
+.app--whatsapp .wi-callrow__ico { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: #25d366; color: #fff; }
+.app--whatsapp .wi-callrow.is-missed .wi-callrow__ico { background: #ff3b30; }
+.app--whatsapp .wi-callrow__txt { display: grid; gap: 1px; }
+.app--whatsapp .wi-callrow__txt strong { font-size: 15px; font-weight: 600; }
+.app--whatsapp .wi-callrow__txt small { color: #667781; font-size: 13px; }
+.app--whatsapp .wi-callrow.is-missed .wi-callrow__txt strong { color: #ff3b30; }
+.app--whatsapp .wi-callrow.is-ring { cursor: pointer; }
+.app--whatsapp .wi-callrow.is-ring .wi-callrow__ico { animation: wi-ring 1.4s ease-in-out infinite; }
+@keyframes wi-ring { 0%, 100% { transform: rotate(0); } 10%, 30% { transform: rotate(-14deg); } 20%, 40% { transform: rotate(14deg); } 50% { transform: rotate(0); } }
+
+/* pesan yang dituju dari link lintas app */
+.app--whatsapp .wi-msg.is-highlight .wi-bubble { animation: wi-flash 2.4s ease; }
+@keyframes wi-flash { 0%, 60% { box-shadow: 0 0 0 3px #ffd54a, 0 1px .5px rgba(0,0,0,.13); } 100% { box-shadow: 0 1px .5px rgba(0,0,0,.13); } }
+
+/* bar tulis pesan */
+.app--whatsapp .wi-compose { flex: 0 0 auto; display: flex; align-items: center; gap: 12px; padding: 6px 12px 8px; background: #f6f6f6; border-top: .5px solid #d1d1d6; color: #007aff; }
+.app--whatsapp .wi-compose__field { flex: 1; height: 34px; border-radius: 18px; border: .5px solid #c8c8cc; background: #fff; }
+
+/* status bar menyatu dengan header terang */
+body[data-app="whatsapp"] .phone { --sb-tint: rgba(246, 246, 246, .88); }

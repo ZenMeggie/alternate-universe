@@ -1,0 +1,86 @@
+/* Base Lock Screen and phone-side controls. Glass refinements live in iphone-glass.css. */
+
+/* ---------- Lock Screen ---------- */
+.phone .lock {
+  position: absolute; inset: 0; z-index: 56;
+  display: flex; flex-direction: column; align-items: center;
+  overflow: hidden; color: #fff;
+  touch-action: none; user-select: none; -webkit-user-select: none;
+  background-color: #514c80;
+  background-image:
+    var(--lock-wallpaper, none),
+    radial-gradient(ellipse at 12% 5%, rgba(255,255,255,.22), transparent 42%),
+    radial-gradient(ellipse at 90% 80%, rgba(255,125,165,.36), transparent 48%),
+    linear-gradient(155deg, #7778bd 0%, #62538f 45%, #282c52 100%);
+  background-size: cover, auto, auto, auto;
+  background-position: center, 0 0, 0 0, 0 0;
+  background-repeat: no-repeat;
+  transition: transform .42s cubic-bezier(.2, .8, .2, 1);
+  animation: lock-in .3s ease;
+}
+.phone .lock[hidden] { display: none; }
+.phone .lock.is-drag { transition: none; }
+.phone .lock.is-unlocking { transform: translateY(-100%); pointer-events: none; }
+@keyframes lock-in { from { opacity: 0; } to { opacity: 1; } }
+
+/* gradien gelap tipis supaya teks putih terbaca di wallpaper apa pun */
+.phone .lock::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.04) 38%, rgba(0,0,0,.42));
+}
+.phone .lock > * { z-index: 1; }
+
+.phone .lock .lock__clock { position: relative; display: grid; justify-items: center; padding-top: calc(var(--sb-h) + 18px); text-align: center; }
+.phone .lock .lock__date { margin: 0; font-size: 20px; font-weight: 600; letter-spacing: -.3px; color: rgba(255,255,255,.92); text-shadow: 0 1px 8px rgba(0,0,0,.2); }
+.phone .lock .lock__time { font-size: 92px; font-weight: 600; line-height: 1; letter-spacing: -4px; font-variant-numeric: tabular-nums; text-shadow: 0 2px 20px rgba(0,0,0,.2); }
+
+.phone .lock .lock__notifs {
+  position: relative; width: 100%; margin-top: auto; padding: 0 12px;
+  margin-bottom: calc(var(--home-h) + 112px);
+  display: grid; gap: 8px;
+}
+.phone .lock .notif {
+  background: rgba(245,245,250,.2); color: #fff; border: 1px solid rgba(255,255,255,.14); box-shadow: none;
+  backdrop-filter: blur(26px) saturate(1.5); -webkit-backdrop-filter: blur(26px) saturate(1.5);
+}
+.phone .lock .notif__body { color: rgba(255,255,255,.9); }
+.phone .lock .notif__top time { color: rgba(255,255,255,.62); }
+.phone .lock .lock__more { margin: 2px 0 0; text-align: center; font-size: 13px; color: rgba(255,255,255,.8); }
+
+.phone .lock .lock__bar { position: absolute; left: 0; right: 0; bottom: calc(var(--home-h) + 38px); display: flex; justify-content: space-between; padding: 0 40px; }
+.phone .lock .lock__btn {
+  width: 50px; height: 50px; border: 0; border-radius: 50%; display: grid; place-items: center; cursor: pointer;
+  color: #fff; background: rgba(30,30,34,.5);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  transition: background .2s, color .2s, transform .15s;
+}
+.phone .lock .lock__btn:active { transform: scale(.92); }
+.phone .lock .lock__btn.is-on { background: #fff; color: #111; }
+
+.phone .lock .lock__hint {
+  position: absolute; left: 0; right: 0; bottom: calc(var(--home-h) + 6px); margin: 0 auto; width: max-content;
+  padding: 4px 10px; border: 0; background: none; cursor: pointer;
+  color: rgba(255,255,255,.7); font: 500 12px var(--ios-font);
+  animation: lock-hint 2.4s ease-in-out infinite;
+}
+@keyframes lock-hint { 0%, 100% { opacity: .45; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-3px); } }
+
+/* status bar & home indicator putih, banner disembunyikan (notifikasi tampil di daftar) */
+body[data-locked] .statusbar { color: #fff; }
+body[data-locked] .statusbar::before { display: none; }
+body[data-locked] .phone__home { pointer-events: none; }   /* swipe terjadi di lock screen */
+body[data-locked] .phone__home span { background: #fff; }
+body[data-locked] .banner-host { display: none; }
+
+/* ---------- tombol samping (kunci) ---------- */
+.phone .phone__side {
+  position: absolute; right: -7px; top: 176px; z-index: 5; width: 11px; height: 78px;
+  border: 0; border-radius: 0 4px 4px 0; background: transparent; cursor: pointer;
+  transition: background .15s;
+}
+.phone .phone__side:hover { background: rgba(255,255,255,.2); }
+.phone .phone__side:active { background: rgba(255,255,255,.35); }
+@media (max-width: 520px) { .phone .phone__side { display: none; } }
+
+/* ---------- perbaikan: overlay kecerahan harus di atas status bar, island, dan banner ---------- */
+.phone .phone__dim { z-index: 90; }

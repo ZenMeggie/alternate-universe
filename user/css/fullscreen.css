@@ -1,0 +1,76 @@
+/* =========================================================
+   PHONE FULLSCREEN — ukuran ditentukan browser.
+   Muat PALING AKHIR (setelah semua css ponsel & home-ios.css).
+   - Tinggi  = area tampil browser (100dvh): mengecil sendiri kalau ada
+               header/footer/toolbar, penuh kalau tidak ada.
+   - Lebar   = penuh di HP; di desktop dibatasi proporsi HP, di tengah.
+   - Tanpa bezel, tanpa padding, tanpa ukuran tetap.
+   ========================================================= */
+
+html { height: 100%; }
+
+/* selama ponsel terbuka, halaman tidak boleh scroll / bounce */
+body[data-view="home"] {
+  position: fixed;
+  inset: 0;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  overscroll-behavior: none;
+  background: #000;
+}
+
+.phone {
+  --sb-h: max(54px, calc(env(safe-area-inset-top, 0px) + 12px));
+  --home-h: max(28px, calc(env(safe-area-inset-bottom, 0px) + 10px));
+  --radius: 0px;
+
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;      /* fallback */
+  height: 100dvh;     /* ikut tinggi area tampil yang sebenarnya */
+  min-height: 0;
+  padding: 0;
+  background: #000;
+}
+body[data-view="landing"] .phone { display: none; }
+
+.phone__frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: #000;
+  box-shadow: none;
+}
+.phone__frame::before,
+.phone__frame::after,
+.phone .phone__side { display: none; }
+
+.phone__screen {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+}
+
+/* layar lebar (desktop/tablet landscape): jaga proporsi HP, tetap di tengah */
+@media (min-aspect-ratio: 3 / 4) {
+  .phone__frame {
+    width: min(100%, calc(100dvh * 0.56));
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, .08), 0 0 80px rgba(0, 0, 0, .6);
+  }
+}
+
+/* Dynamic Island hanya sebagai hiasan di desktop; di HP asli sudah ada perangkat kerasnya */
+@media (pointer: coarse) {
+  .phone__island { display: none; }
+}

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Same Time Next Year · An AU Story</title>
+  <meta name="description" content="An interactive alternate-universe story told through Notes, WhatsApp, Gallery and X.">
+  <meta name="theme-color" content="#f2f2f7">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/apps.css">
+  <link rel="stylesheet" href="css/phone.css">
+  <link rel="stylesheet" href="css/whatsapp-ios.css">
+  <link rel="stylesheet" href="css/x-ios.css">
+  <!-- <link rel="stylesheet" href="css/phone-ios.css"> -->
+  <link rel="stylesheet" href="css/ios-lock.css">
+  <link rel="stylesheet" href="css/ios-realistic.css">
+  <link rel="stylesheet" href="css/iphone-home.css">
+  <link rel="stylesheet" href="css/home-ios.css">
+  <link rel="stylesheet" href="css/fullscreen.css">
+  <link rel="stylesheet" href="css/iphone-device.css">
+  <link rel="stylesheet" href="css/phone-motion.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/iphone-glass.css">
+  <style>
+    #app-loading { position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center; background: var(--bg); color: var(--muted); font: 500 15px system-ui, sans-serif; }
+  </style>
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <script type="module" src="js/main.js"></script>
+</head>
+<body data-view="landing">
+  <div id="app-loading" role="status">Loading story…</div>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <nav id="floating-nav" class="fnav" aria-label="Main"></nav>
+
+  <main id="main">
+    <!-- 1 & 2. Landing: characters, then dates -->
+    <div id="view-landing" class="view is-active">
+      <section id="characters" class="hero">
+        <div class="hero__inner">
+          <p class="eyebrow">An AU story · EmiBonnie</p>
+          <h1 id="landing-title"></h1>
+          <p id="landing-subtitle" class="hero__sub"></p>
+          <div id="landing-cards" class="char-grid"></div>
+          <button type="button" class="scroll-cue" data-action="scroll-dates">Choose a date <span>↓</span></button>
+        </div>
+      </section>
+
+      <section id="dates" class="dates">
+        <div class="dates__inner">
+          <p class="eyebrow">Step 2</p>
+          <h2>Pick a day to read</h2>
+          <p class="dates__lead">Every app shows what happened on the day you pick, from the point of view you chose.</p>
+          <div id="landing-dates" class="date-list"></div>
+          <div id="landing-detail"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- 3. Phone: home screen + apps, wrapped in the iPhone shell (phone.css / phone/shell.js) -->
+  <div id="phone" class="phone">
+    <div class="phone__frame">
+      <div id="phone-screen" class="phone__screen">
+
+        <div id="view-home" class="view" hidden>
+          <div id="home-content" class="home"></div>
+        </div>
+
+        <div id="app-layer" class="app-layer">
+          <section id="app-notes" class="app app--notes" hidden aria-label="Notes"></section>
+          <section id="app-whatsapp" class="app app--whatsapp" hidden aria-label="WhatsApp"></section>
+          <section id="app-gallery" class="app app--gallery" hidden aria-label="Gallery"></section>
+          <section id="app-twitter" class="app app--twitter" hidden aria-label="X"></section>
+          <section id="app-stories" class="app app--stories" hidden aria-label="Stories"></section>
+          <section id="app-music" class="app app--music" hidden aria-label="Music"></section>
+          <section id="app-settings" class="app app--settings" hidden aria-label="Settings"></section>
+          <section id="app-calender" class="app app--calender" hidden aria-label="Calender"></section>
+          <section id="app-calculator" class="app app--calculator" hidden aria-label="Calculator"></section>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "au-storytelling-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Interactive AU storytelling website (HTML, CSS, vanilla JS ES modules)",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "assets": "node tools/make-assets.mjs",
+    "validate": "node tools/validate-data.mjs"
+  }
+}

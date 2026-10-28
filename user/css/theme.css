@@ -1,0 +1,735 @@
+:root {
+  color-scheme: light;
+  transition: background-color .2s ease, color .2s ease;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #000;
+  --surface: #1c1c1e;
+  --surface-2: #2c2c2e;
+  --ink: #f5f5f7;
+  --ink-2: #d1d1d6;
+  --muted: #98989f;
+  --line: rgba(235, 235, 245, .16);
+  --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, .55);
+  --sb-tint: rgba(28, 28, 30, .65);
+}
+
+:root[data-theme="dark"] body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+:root[data-theme="dark"] .fnav {
+  background: rgba(38, 38, 42, .88);
+  border-color: rgba(255, 255, 255, .16);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, .4), 0 1px 0 rgba(255, 255, 255, .08) inset;
+  color: #f5f5f7;
+}
+
+:root[data-theme="dark"] .fnav__profile {
+  background: #3a3a3c;
+  color: #f5f5f7;
+}
+
+:root[data-theme="dark"] .fnav__user {
+  background: rgba(255, 255, 255, .14);
+}
+
+:root[data-theme="dark"] .fnav__date {
+  background: rgba(255, 255, 255, .1);
+}
+
+:root[data-theme="dark"] .fnav__step:hover {
+  background: rgba(255, 255, 255, .1);
+}
+
+:root[data-theme="dark"] .fnav__daylabel {
+  color: #a1a1a8;
+}
+
+:root[data-theme="dark"] .switcher {
+  background: rgba(38, 38, 42, .96);
+}
+
+:root[data-theme="dark"] .fnav__btn:hover,
+:root[data-theme="dark"] .switcher__item:hover,
+:root[data-theme="dark"] .switcher__item.is-active {
+  background: rgba(255, 255, 255, .08);
+}
+
+:root[data-theme="dark"] .switcher {
+  border-color: rgba(255, 255, 255, .14);
+  color: #f5f5f7;
+}
+
+:root[data-theme="dark"] .switcher__item small,
+:root[data-theme="dark"] .switcher__hint {
+  color: #a1a1a8;
+}
+
+:root[data-theme="dark"] .hero {
+  background:
+    radial-gradient(1100px 600px at 12% -10%, rgba(119, 40, 75, .24) 0%, transparent 60%),
+    radial-gradient(900px 560px at 100% 0%, rgba(35, 75, 130, .25) 0%, transparent 55%),
+    var(--bg);
+}
+
+:root[data-theme="dark"] .cast {
+  border: 1px solid rgba(255, 255, 255, .12);
+  background: rgba(28, 28, 30, .78);
+  color: #f5f5f7;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .24), inset 0 1px 0 rgba(255, 255, 255, .06);
+  -webkit-backdrop-filter: blur(18px) saturate(1.35);
+  backdrop-filter: blur(18px) saturate(1.35);
+}
+
+:root[data-theme="dark"] .cast .eyebrow {
+  color: #a1a1a8;
+}
+
+:root[data-theme="dark"] .cast strong {
+  color: #f5f5f7;
+}
+
+:root[data-theme="dark"] .cast small {
+  color: #b0b0b8;
+}
+
+:root[data-theme="dark"] .phone__screen {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+:root[data-theme="dark"] .phone .app {
+  background-color: var(--bg);
+  color: var(--ink);
+}
+
+:root[data-theme="dark"] .phone .statusbar {
+  color: #fff;
+}
+
+:root[data-theme="dark"] .phone {
+  --ios-separator: rgba(235, 235, 245, .16);
+}
+
+:root[data-theme="dark"] .phone .phone__home span {
+  background: #fff;
+}
+
+:root[data-theme="dark"] .ios-nav {
+  background: rgba(28, 28, 30, .94);
+}
+
+:root[data-theme="dark"] .ios-group,
+:root[data-theme="dark"] .ios-card {
+  background: #1c1c1e;
+}
+
+:root[data-theme="dark"] .ios-row {
+  color: #f5f5f7;
+}
+
+:root[data-theme="dark"] .ios-search {
+  background: rgba(118, 118, 128, .24);
+  color: #98989f;
+}
+
+.ios-appearance-preview {
+  display: grid;
+  align-content: start;
+  gap: 5px;
+  width: 52px;
+  height: 66px;
+  flex: none;
+  padding: 8px 6px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+}
+
+.ios-appearance-preview--light { background: #f2f2f7; }
+.ios-appearance-preview--dark { background: #1c1c1e; }
+.ios-appearance-preview i { height: 7px; border-radius: 3px; background: #8e8e93; }
+.ios-appearance-preview i:first-child { width: 65%; background: #007aff; }
+
+:root[data-theme="dark"] .app--notes,
+:root[data-theme="dark"] .app--notes .app-top {
+  background: #1c1b18;
+}
+
+:root[data-theme="dark"] .notes__detail,
+:root[data-theme="dark"] .notes-list {
+  background: #242320;
+}
+
+:root[data-theme="dark"] .note-row.is-active {
+  background: #5a4a17;
+}
+
+:root[data-theme="dark"] .note-row.is-active span,
+:root[data-theme="dark"] .note-row.is-active time,
+:root[data-theme="dark"] .note-detail__text {
+  color: #f5f0df;
+}
+
+:root[data-theme="dark"] .app--whatsapp,
+:root[data-theme="dark"] .wa__list {
+  background: #111b21;
+}
+
+:root[data-theme="dark"] .wa__who,
+:root[data-theme="dark"] .conv__head {
+  background: #202c33;
+  color: #e9edef;
+}
+
+:root[data-theme="dark"] .chat-row {
+  border-color: rgba(255, 255, 255, .08);
+}
+
+:root[data-theme="dark"] .chat-row:hover,
+:root[data-theme="dark"] .chat-row.is-active {
+  background: #202c33;
+}
+
+:root[data-theme="dark"] .wa__conv,
+:root[data-theme="dark"] .sc-chat {
+  background-color: #0b141a;
+  background-image: radial-gradient(rgba(255, 255, 255, .025) 1px, transparent 1px);
+}
+
+:root[data-theme="dark"] .msg--in .msg__bubble,
+:root[data-theme="dark"] .sc-msg--in {
+  background: #202c33;
+  color: #e9edef;
+}
+
+:root[data-theme="dark"] .msg--out .msg__bubble,
+:root[data-theme="dark"] .sc-msg--out {
+  background: #005c4b;
+  color: #e9edef;
+}
+
+:root[data-theme="dark"] .conv__compose,
+:root[data-theme="dark"] .day-sep span {
+  background: #202c33;
+  color: #e9edef;
+}
+
+:root[data-theme="dark"] .narration__text {
+  background: #332b1b;
+  color: #f5eddb;
+}
+
+:root[data-theme="dark"] .app--gallery .album,
+:root[data-theme="dark"] .app--gallery .photo-detail,
+:root[data-theme="dark"] .app--gallery .map-pop {
+  background-color: #1c1c1e;
+  color: #f5f5f7;
+}
+
+:root[data-theme="dark"] .app--gallery .app-top {
+  background: #1c1c1e;
+}
+
+:root[data-theme="dark"] .leaflet-popup-content-wrapper,
+:root[data-theme="dark"] .leaflet-popup-tip {
+  background: #1c1c1e;
+  color: #f5f5f7;
+}
+
+:root[data-theme="dark"] .leaflet-popup-content {
+  color: #f5f5f7;
+}
+
+:root[data-theme="dark"] .stories-book__cover {
+  background: #3a3025;
+  color: #eee2d0;
+}
+
+:root[data-theme="dark"] .stories-read {
+  color: var(--ink);
+}
+
+:root[data-theme="dark"] .calender-app,
+:root[data-theme="dark"] .calender-month,
+:root[data-theme="dark"] .calender-day {
+  background: #000;
+  color: #f5f5f7;
+}
+
+:root[data-theme="dark"] .calender-header {
+  background: #1c1c1e;
+}
+
+:root[data-theme="dark"] .calender-story-range,
+:root[data-theme="dark"] .calender-weekday,
+:root[data-theme="dark"] .calender-day,
+:root[data-theme="dark"] .calender-events,
+:root[data-theme="dark"] .calender-event,
+:root[data-theme="dark"] .calender-footer {
+  border-color: rgba(235, 235, 245, .16);
+}
+
+:root[data-theme="dark"] .calender-empty p {
+  color: var(--ink);
+}
+
+:root[data-theme="dark"] #app-calender,
+:root[data-theme="dark"] .ios-cal-app {
+  background: #000;
+  color: #f5f5f7;
+}
+
+:root[data-theme="dark"] .ios-cal-top,
+:root[data-theme="dark"] .ios-cal-weekdays,
+:root[data-theme="dark"] .ios-cal-tabbar {
+  background: #1c1c1e;
+  color: #f5f5f7;
+}
+
+:root[data-theme="dark"] .ios-cal-status,
+:root[data-theme="dark"] .ios-cal-weekdays .is-weekend,
+:root[data-theme="dark"] .ios-cal-day.is-weekend,
+:root[data-theme="dark"] .ios-cal-selected-date,
+:root[data-theme="dark"] .ios-cal-empty p,
+:root[data-theme="dark"] .ios-cal-events p {
+  color: #98989f;
+}
+
+:root[data-theme="dark"] .ios-cal-day {
+  background: #000;
+  color: #f5f5f7;
+  border-top-color: rgba(235, 235, 245, .16);
+}
+
+:root[data-theme="dark"] .ios-cal-schedule,
+:root[data-theme="dark"] .ios-cal-events li {
+  border-color: rgba(235, 235, 245, .16);
+}
+
+:root[data-theme="dark"] .phone .sheet {
+  color: #f5f5f7;
+}
+
+:root[data-theme="dark"] .phone .banner-host .notif,
+:root[data-theme="dark"] .phone .sheet--notif .notif {
+  border: 1px solid rgba(255, 255, 255, .12);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, .13), rgba(255, 255, 255, .035)),
+    rgba(38, 38, 42, .88);
+  color: #f5f5f7;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .35), inset 0 1px 0 rgba(255, 255, 255, .08);
+}
+
+:root[data-theme="dark"] .phone .banner-host .notif__body,
+:root[data-theme="dark"] .phone .sheet--notif .notif__body {
+  color: rgba(245, 245, 247, .88);
+}
+
+:root[data-theme="dark"] .phone .banner-host .notif__top time,
+:root[data-theme="dark"] .phone .sheet--notif .notif__top time {
+  color: rgba(235, 235, 245, .58);
+}
+
+/* WhatsApp */
+:root[data-theme="dark"] .phone .app--whatsapp,
+:root[data-theme="dark"] .app--whatsapp .wi {
+  background: #0b141a;
+  color: #e9edef;
+}
+
+:root[data-theme="dark"] .app--whatsapp .wi-top,
+:root[data-theme="dark"] .app--whatsapp .wi-head,
+:root[data-theme="dark"] .app--whatsapp .wi-compose,
+:root[data-theme="dark"] .app--whatsapp .wi-tabs {
+  background: #111b21;
+  color: #e9edef;
+  border-color: rgba(255, 255, 255, .08);
+}
+
+:root[data-theme="dark"] .app--whatsapp .wi-title,
+:root[data-theme="dark"] .app--whatsapp .wi-row,
+:root[data-theme="dark"] .app--whatsapp .wi-contact {
+  color: #e9edef;
+}
+
+:root[data-theme="dark"] .app--whatsapp .wi-search,
+:root[data-theme="dark"] .app--whatsapp .wi-accounts {
+  background: #202c33;
+  color: #aebac1;
+}
+
+:root[data-theme="dark"] .app--whatsapp .wi-links,
+:root[data-theme="dark"] .app--whatsapp .wi-row__body {
+  border-color: rgba(255, 255, 255, .08);
+}
+
+:root[data-theme="dark"] .app--whatsapp .wi-label,
+:root[data-theme="dark"] .app--whatsapp .wi-row__top time,
+:root[data-theme="dark"] .app--whatsapp .wi-row__sub,
+:root[data-theme="dark"] .app--whatsapp .wi-contact small {
+  color: #8696a0;
+}
+
+:root[data-theme="dark"] .app--whatsapp .wi-row:active,
+:root[data-theme="dark"] .app--whatsapp .wi-account:active {
+  background: #202c33;
+}
+
+:root[data-theme="dark"] .app--whatsapp .wi-tab {
+  color: #8696a0;
+}
+
+:root[data-theme="dark"] .app--whatsapp .wi-tab.is-on {
+  color: #25d366;
+}
+
+:root[data-theme="dark"] .app--whatsapp .wi-chat {
+  background-color: #0b141a;
+  background-image: radial-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px);
+}
+
+:root[data-theme="dark"] .app--whatsapp .wi-day span {
+  background: #182229;
+  color: #aebac1;
+}
+
+:root[data-theme="dark"] .app--whatsapp .wi-bubble,
+:root[data-theme="dark"] .app--whatsapp .wi-msg--out .wi-bubble {
+  background: #202c33;
+  color: #e9edef;
+}
+
+:root[data-theme="dark"] .app--whatsapp .wi-msg--out .wi-bubble {
+  background: #005c4b;
+}
+
+:root[data-theme="dark"] .app--whatsapp .wi-meta,
+:root[data-theme="dark"] .app--whatsapp .wi-callrow__txt small {
+  color: #aebac1;
+}
+
+:root[data-theme="dark"] .app--whatsapp .wi-compose__field {
+  background: #2a3942;
+  border-color: #34454f;
+}
+
+/* X uses the app-wide light appearance instead of staying in its dark palette. */
+:root:not([data-theme="dark"]) .phone .app--twitter,
+:root:not([data-theme="dark"]) .app--twitter .xi {
+  background: #fff;
+  color: #0f1419;
+}
+
+:root:not([data-theme="dark"]) .app--twitter .xi-top,
+:root:not([data-theme="dark"]) .app--twitter .xi-tabs,
+:root:not([data-theme="dark"]) .app--twitter .xi-bar {
+  background: rgba(255, 255, 255, .94);
+  color: #0f1419;
+  border-color: #eff3f4;
+}
+
+:root:not([data-theme="dark"]) .app--twitter .xi-logo,
+:root:not([data-theme="dark"]) .app--twitter .xi-tab.is-on,
+:root:not([data-theme="dark"]) .app--twitter .xi-counts strong,
+:root:not([data-theme="dark"]) .app--twitter .xi-lock,
+:root:not([data-theme="dark"]) .app--twitter .xi-drawer__counts strong {
+  color: #0f1419;
+}
+
+:root:not([data-theme="dark"]) .app--twitter .xi-pill {
+  border-color: #cfd9de;
+}
+
+:root:not([data-theme="dark"]) .app--twitter .xi-handle,
+:root:not([data-theme="dark"]) .app--twitter .xi-meta,
+:root:not([data-theme="dark"]) .app--twitter .xi-counts,
+:root:not([data-theme="dark"]) .app--twitter .xi-label,
+:root:not([data-theme="dark"]) .app--twitter .xi-head span,
+:root:not([data-theme="dark"]) .app--twitter .xi-quote__head span,
+:root:not([data-theme="dark"]) .app--twitter .xi-quote--gone,
+:root:not([data-theme="dark"]) .app--twitter .xi-actions,
+:root:not([data-theme="dark"]) .app--twitter .xi-related > p,
+:root:not([data-theme="dark"]) .app--twitter .xi-drawer__me p,
+:root:not([data-theme="dark"]) .app--twitter .xi-drawer__label,
+:root:not([data-theme="dark"]) .app--twitter .xi-acct__txt small,
+:root:not([data-theme="dark"]) .app--twitter .xi-drawer__foot {
+  color: #536471;
+}
+
+:root:not([data-theme="dark"]) .app--twitter .xi-post,
+:root:not([data-theme="dark"]) .app--twitter .xi-media,
+:root:not([data-theme="dark"]) .app--twitter .xi-quote,
+:root:not([data-theme="dark"]) .app--twitter .xi-replies,
+:root:not([data-theme="dark"]) .app--twitter .xi-drawer__label {
+  border-color: #eff3f4;
+}
+
+:root:not([data-theme="dark"]) .app--twitter .xi-related,
+:root:not([data-theme="dark"]) .app--twitter .xi-acct:active {
+  background: #f7f9f9;
+}
+
+:root:not([data-theme="dark"]) .app--twitter .xi-acct.is-on {
+  background: #eff3f4;
+}
+
+:root:not([data-theme="dark"]) .app--twitter .xi-drawer {
+  background: #fff;
+  border-color: #eff3f4;
+  box-shadow: 8px 0 30px rgba(15, 20, 25, .16);
+}
+
+:root:not([data-theme="dark"]) .app--twitter .xi-ring {
+  box-shadow: 0 0 0 4px #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { transition: none; }
+}
+
+/* Finish the dark appearance on surfaces that keep iOS-specific light colors. */
+:root[data-theme="dark"] {
+  --phone-surface: #1c1c1e;
+  --phone-separator: rgba(235, 235, 245, .16);
+}
+
+:root[data-theme="dark"] .dates {
+  background: linear-gradient(180deg, var(--bg), #101116);
+}
+
+:root[data-theme="dark"] .phone #view-home .hs-cal,
+:root[data-theme="dark"] #home-content .ios-widgets > .widget--day {
+  border-color: rgba(255, 255, 255, .16);
+  background: rgba(34, 34, 38, .82);
+  color: #f5f5f7;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08), 0 8px 22px rgba(0, 0, 0, .2);
+  -webkit-backdrop-filter: blur(24px) saturate(1.45);
+  backdrop-filter: blur(24px) saturate(1.45);
+}
+
+:root[data-theme="dark"] .phone #view-home .hs-cal__dow,
+:root[data-theme="dark"] #home-content .widget--day small {
+  color: #ff6961;
+}
+
+:root[data-theme="dark"] .phone #view-home .hs-cal__ev,
+:root[data-theme="dark"] #home-content .widget--day span {
+  color: #b0b0b8;
+}
+
+:root[data-theme="dark"] .phone #view-home .hs-music {
+  border-color: rgba(255, 255, 255, .12);
+  background: rgba(18, 18, 22, .72);
+}
+
+:root[data-theme="dark"] .phone .ios-settings {
+  background-color: #000;
+  color: #f5f5f7;
+}
+
+:root[data-theme="dark"] .phone .ios-nav {
+  background: rgba(28, 28, 30, .94);
+}
+
+:root[data-theme="dark"] .phone .ios-label,
+:root[data-theme="dark"] .phone .ios-foot,
+:root[data-theme="dark"] .phone .ios-card__txt small,
+:root[data-theme="dark"] .phone .ios-row__stack small {
+  color: #98989f;
+}
+
+:root[data-theme="dark"] .phone .ios-card,
+:root[data-theme="dark"] .phone .ios-group {
+  border-color: var(--phone-separator);
+  background: var(--phone-surface);
+  color: #f5f5f7;
+}
+
+:root[data-theme="dark"] .phone .ios-row:not(.ios-row--danger):not(.ios-row--static):hover {
+  background: rgba(255, 255, 255, .07);
+}
+
+:root[data-theme="dark"] .phone .ios-search {
+  background: rgba(118, 118, 128, .24);
+  color: #b0b0b8;
+}
+
+:root[data-theme="dark"] .phone .app--notes .notes__detail,
+:root[data-theme="dark"] .phone .app--notes .notes-list {
+  background: #242320;
+  color: #f5f0df;
+}
+
+:root[data-theme="dark"] .phone .app--notes .note-detail__text {
+  color: #f5f0df;
+}
+
+:root[data-theme="dark"] .phone .app--stories .stories-app,
+:root[data-theme="dark"] .phone .app--stories .stories-reader {
+  color: #f5f5f7;
+}
+
+:root[data-theme="dark"] .phone .app--stories .stories-reader__sub,
+:root[data-theme="dark"] .phone .app--stories .stories-chapter__info p {
+  color: #a1a1a8;
+}
+
+:root[data-theme="dark"] .phone .app--stories .stories-chapter,
+:root[data-theme="dark"] .phone .app--stories .stories-book,
+:root[data-theme="dark"] .phone .app--stories .stories-reader-nav {
+  border-color: var(--phone-separator);
+}
+
+:root[data-theme="dark"] .phone .app--stories .stories-read {
+  border-color: rgba(255, 255, 255, .2);
+  background: rgba(255, 255, 255, .06);
+}
+
+:root[data-theme="dark"] .phone .app--stories .rt-music {
+  border-color: rgba(255, 255, 255, .12);
+  background: rgba(255, 255, 255, .06);
+}
+
+:root[data-theme="dark"] .phone .app--stories .rt-music__toggle {
+  background: #f5f5f7;
+  color: #1c1c1e;
+}
+
+:root[data-theme="dark"] .phone .app--gallery .gallery-bar,
+:root[data-theme="dark"] .phone .app--gallery .gallery-body,
+:root[data-theme="dark"] .phone .app--gallery .photo-detail,
+:root[data-theme="dark"] .phone .app--gallery .album {
+  background-color: #1c1c1e;
+  color: #f5f5f7;
+}
+
+:root[data-theme="dark"] .phone .app--gallery .photo-detail__ctx,
+:root[data-theme="dark"] .phone .app--gallery .album__body p,
+:root[data-theme="dark"] .phone .app--gallery .map-legend {
+  color: #a1a1a8;
+}
+
+:root[data-theme="dark"] .phone .app--gallery .gallery-tab,
+:root[data-theme="dark"] .phone .app--gallery .gallery-bar button {
+  color: #a1a1a8;
+}
+
+:root[data-theme="dark"] .phone .app--gallery .segmented {
+  background: rgba(118, 118, 128, .24);
+}
+
+:root[data-theme="dark"] .phone .app--gallery .segmented__btn {
+  color: #b0b0b8;
+}
+
+:root[data-theme="dark"] .phone .app--gallery .segmented__btn.is-active {
+  background: #3a3a3c;
+  color: #f5f5f7;
+}
+
+:root[data-theme="dark"] .phone .app--gallery .photo-detail__body {
+  background: #1c1c1e;
+  color: #f5f5f7;
+}
+
+:root[data-theme="dark"] .phone .app--gallery .facts dt,
+:root[data-theme="dark"] .phone .app--gallery .facts dd {
+  color: #f5f5f7;
+}
+
+:root[data-theme="dark"] .phone .app--twitter .xi-tab.is-on,
+:root[data-theme="dark"] .phone .app--twitter .xi-logo {
+  color: #0a84ff;
+}
+
+:root[data-theme="dark"] .phone .app--twitter .xi-drawer__label {
+  color: #8b98a5;
+}
+
+:root[data-theme="dark"] .modal--photo .photo-detail__body {
+  background: #1c1c1e;
+  color: #f5f5f7;
+}
+
+:root[data-theme="dark"] .modal--photo .facts dt,
+:root[data-theme="dark"] .modal--photo .facts dd,
+:root[data-theme="dark"] .modal--photo .photo-detail__ctx {
+  color: #d1d1d6;
+}
+
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] textarea,
+:root[data-theme="dark"] select {
+  color-scheme: dark;
+}
+
+:root[data-theme="dark"] .phone .app--twitter .xi,
+:root[data-theme="dark"] .phone .app--twitter .xi-top,
+:root[data-theme="dark"] .phone .app--twitter .xi-tabs,
+:root[data-theme="dark"] .phone .app--twitter .xi-bar,
+:root[data-theme="dark"] .phone .app--twitter .xi-drawer {
+  background-color: #000;
+  color: #f5f5f7;
+}
+
+:root[data-theme="dark"] .phone .app--twitter .xi-post,
+:root[data-theme="dark"] .phone .app--twitter .xi-media,
+:root[data-theme="dark"] .phone .app--twitter .xi-quote,
+:root[data-theme="dark"] .phone .app--twitter .xi-replies {
+  border-color: rgba(255, 255, 255, .16);
+}
+
+:root[data-theme="dark"] .phone .app--twitter .xi-meta,
+:root[data-theme="dark"] .phone .app--twitter .xi-handle,
+:root[data-theme="dark"] .phone .app--twitter .xi-label,
+:root[data-theme="dark"] .phone .app--twitter .xi-related > p {
+  color: #8b98a5;
+}
+
+:root[data-theme="dark"] .phone .app--music {
+  background: #000;
+  color: #f5f5f7;
+}
+
+:root[data-theme="dark"] .phone .music-header > p:last-child,
+:root[data-theme="dark"] .phone .music-library__heading > p,
+:root[data-theme="dark"] .phone .music-track__copy small,
+:root[data-theme="dark"] .phone .music-now small,
+:root[data-theme="dark"] .phone .music-now__status {
+  color: #98989f;
+}
+
+:root[data-theme="dark"] .phone .music-tabs {
+  background: rgba(118, 118, 128, .24);
+}
+
+:root[data-theme="dark"] .phone .music-tabs button {
+  color: #d1d1d6;
+}
+
+:root[data-theme="dark"] .phone .music-tabs button.is-active,
+:root[data-theme="dark"] .phone .music-tracks,
+:root[data-theme="dark"] .phone .music-empty {
+  background: #1c1c1e;
+  color: #f5f5f7;
+}
+
+:root[data-theme="dark"] .phone .music-library__heading > span,
+:root[data-theme="dark"] .phone .music-track__play {
+  background: #2c2c2e;
+  color: #f5f5f7;
+}
+
+:root[data-theme="dark"] .phone .music-track + .music-track,
+:root[data-theme="dark"] .phone .music-now {
+  border-color: rgba(255, 255, 255, .12);
+}
+
+:root[data-theme="dark"] .phone .music-now {
+  background: rgba(28, 28, 30, .92);
+}

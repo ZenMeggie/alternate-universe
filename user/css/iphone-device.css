@@ -1,0 +1,259 @@
+/* =========================================================
+   iPHONE DEVICE — bingkai titanium, kaca layar, ukuran asli (393 x 852 pt).
+   Muat PALING AKHIR. Menggantikan phone-fullscreen.css (jangan dimuat keduanya).
+
+   Dua mode, ditentukan browser:
+   1) Desktop / tablet  : perangkat utuh (frame titanium) yang di-scale otomatis
+                          agar muat di area tampil browser (js/phone/fit.js).
+                          Ada header/footer browser -> mengecil, tidak ada -> besar.
+   2) Layar sempit (<=520px) / HP asli : tanpa frame, layar penuh edge-to-edge.
+   ========================================================= */
+
+.phone {
+  --ios-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Inter", system-ui, "Helvetica Neue", Arial, sans-serif;
+
+  /* ukuran iPhone 15/16 Pro */
+  --scr-w: 393px;
+  --scr-h: 852px;
+  --radius: 55px;
+  --sb-h: 59px;
+  --home-h: 34px;
+  --island-w: 126px;
+  --island-h: 37px;
+
+  /* bingkai */
+  --rim: 4px;      /* tepi titanium */
+  --bezel: 10px;   /* bingkai hitam di sekeliling layar */
+  --frame-w: calc(var(--scr-w) + 2 * (var(--rim) + var(--bezel)));
+  --frame-h: calc(var(--scr-h) + 2 * (var(--rim) + var(--bezel)));
+
+  /* warna: Natural Titanium (default) */
+  --ti-1: #dad6cd;
+  --ti-2: #a29e95;
+  --ti-3: #6f6c66;
+  --ti-4: #c3bfb6;
+
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: block;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+  color: #fff;
+  font-family: var(--ios-font);
+  background: radial-gradient(ellipse at 50% 32%, #2c2e35 0%, #14151a 55%, #060608 100%);
+}
+body[data-view="landing"] .phone { display: none; }
+body[data-view="home"] { position: fixed; inset: 0; overflow: hidden; overscroll-behavior: none; background: #000; }
+
+/* pilihan warna: <div id="phone" class="phone" data-finish="blue"> */
+.phone[data-finish="blue"]  { --ti-1: #aab4c2; --ti-2: #6d7889; --ti-3: #454d5b; --ti-4: #8e98a8; }
+.phone[data-finish="white"] { --ti-1: #f1efea; --ti-2: #cfccc5; --ti-3: #a5a29b; --ti-4: #e2dfd8; }
+.phone[data-finish="black"] { --ti-1: #5a5a5e; --ti-2: #3a3a3d; --ti-3: #1e1e20; --ti-4: #49494c; }
+
+/* ---------- bingkai titanium ---------- */
+.phone__frame {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  box-sizing: border-box;
+  width: var(--frame-w);
+  height: var(--frame-h);
+  max-width: none;
+  max-height: none;
+  padding: calc(var(--rim) + var(--bezel));
+  border: 0;
+  border-radius: calc(var(--radius) + var(--rim) + var(--bezel));
+  overflow: visible;
+  isolation: isolate;
+  transform: translate(-50%, -50%) scale(var(--phone-scale, 1));
+  transform-origin: center;
+  background:
+    /* serat brushed */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9 .025' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .2 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    /* kilau tepi atas dan bawah */
+    linear-gradient(180deg, rgba(255,255,255,.35) 0%, transparent 7%, transparent 93%, rgba(0,0,0,.35) 100%),
+    /* warna dasar titanium */
+    linear-gradient(135deg, var(--ti-1) 0%, var(--ti-2) 20%, var(--ti-3) 46%, var(--ti-4) 64%, var(--ti-2) 84%, var(--ti-3) 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, .38),
+    inset 0 2px 3px rgba(255, 255, 255, .55),
+    inset 0 -2px 4px rgba(0, 0, 0, .5),
+    0 0 0 1px rgba(0, 0, 0, .75),
+    0 46px 90px rgba(0, 0, 0, .62),
+    0 12px 28px rgba(0, 0, 0, .42);
+}
+
+/* tombol sisi kiri: Action, Volume +, Volume - */
+.phone__frame::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -4px;
+  top: 112px;
+  width: 5px;
+  height: 245px;
+  border-radius: 3px 0 0 3px;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, var(--ti-3), var(--ti-1)) 0 0 / 100% 34px no-repeat,
+    linear-gradient(90deg, var(--ti-3), var(--ti-1)) 0 70px / 100% 62px no-repeat,
+    linear-gradient(90deg, var(--ti-3), var(--ti-1)) 0 148px / 100% 62px no-repeat;
+}
+.phone__frame::after { content: none; }
+
+/* tombol power (elemen .phone__side dipakai untuk kunci/buka, jadi dibuat tampak sebagai tombolnya) */
+.phone .phone__side {
+  position: absolute;
+  z-index: -1;
+  right: -4px;
+  top: 190px;
+  width: 5px;
+  height: 100px;
+  padding: 0;
+  border: 0;
+  border-radius: 0 3px 3px 0;
+  cursor: pointer;
+  background: linear-gradient(270deg, var(--ti-3), var(--ti-1));
+  transition: filter .15s;
+}
+.phone .phone__side::before { content: ""; position: absolute; inset: -6px -8px -6px -2px; } /* area klik lebih lebar */
+.phone .phone__side:hover { filter: brightness(1.2); background: linear-gradient(270deg, var(--ti-3), var(--ti-1)); }
+.phone .phone__side:active { filter: brightness(.85); transform: translateX(-1px); }
+
+/* ---------- layar & kaca ---------- */
+.phone__screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: #f2f2f7;
+  color: #000;
+  isolation: isolate;
+  -webkit-mask-image: none;
+  box-shadow: 0 0 0 var(--bezel) #000, 0 0 0 calc(var(--bezel) + 1px) rgba(255, 255, 255, .07);
+}
+
+/* pantulan kaca + vinyet tepi layar */
+.phone__glare {
+  position: absolute;
+  inset: 0;
+  z-index: 95;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    linear-gradient(118deg, rgba(255,255,255,.085) 0%, rgba(255,255,255,.03) 24%, transparent 25%),
+    radial-gradient(120% 55% at 0 0, rgba(255,255,255,.05), transparent 60%);
+  box-shadow: inset 0 0 0 .5px rgba(255,255,255,.14), inset 0 0 22px rgba(0,0,0,.16);
+}
+
+/* ---------- Dynamic Island ---------- */
+.phone__island {
+  position: absolute;
+  top: 11px;
+  left: 50%;
+  z-index: 70;
+  width: var(--island-w);
+  height: var(--island-h);
+  border: 0;
+  border-radius: 999px;
+  background: #000;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,.04);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.phone__lens {
+  position: absolute;
+  top: 50%;
+  right: 13px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  background: radial-gradient(circle at 35% 35%, #2a3550 0%, #0b0f1c 55%, #000 100%);
+  box-shadow: 0 0 0 1.5px #0a0a0c, inset 0 0 2px rgba(120,150,255,.35);
+}
+
+/* ---------- status bar: waktu di "telinga" kiri, ikon di kanan, sejajar island ---------- */
+.statusbar {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 65;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--sb-h);
+  padding: 0;
+  font: 600 17px/1 var(--ios-font);
+  letter-spacing: -.4px;
+}
+.statusbar__zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: calc((100% - var(--island-w)) / 2);
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border-radius: 0;
+}
+.statusbar__zone--l, .statusbar__zone--r { min-width: 0; }
+.statusbar .sb-icons { display: inline-flex; align-items: center; gap: 5px; }
+.statusbar svg { display: block; }
+
+/* ---------- home indicator ---------- */
+.phone__home {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--home-h);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 8px;
+  box-sizing: border-box;
+}
+.phone__home span {
+  width: 144px;
+  height: 5px;
+  border-radius: 999px;
+}
+
+/* ---------- HP asli / layar sempit: tanpa frame, layar penuh ---------- */
+@media (max-width: 520px) {
+  .phone {
+    --sb-h: max(54px, calc(env(safe-area-inset-top, 0px) + 10px));
+    --home-h: max(28px, calc(env(safe-area-inset-bottom, 0px) + 10px));
+    --radius: 0px;
+    --rim: 0px;
+    --bezel: 0px;
+    height: 100vh;
+    height: 100dvh;
+    background: #000;
+  }
+  .phone__frame {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border-radius: 0;
+    background: #000;
+    box-shadow: none;
+    transform: none;
+  }
+  .phone__frame::before,
+  .phone .phone__side,
+  .phone__glare { display: none; }
+  .phone__screen { box-shadow: none; }
+}
+
+/* HP asli sudah punya Dynamic Island fisik */
+@media (pointer: coarse) and (max-width: 520px) {
+  .phone__island { display: none; }
+}

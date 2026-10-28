@@ -1,0 +1,567 @@
+/* iPhone: frame, status bar, home, Settings, notifikasi. Semua di-scope ke .phone. */
+.phone {
+  --sb-h: 54px;
+  --home-h: 30px;
+  --radius: 52px;
+  --w: 390px;
+  --h: 844px;
+  --ios-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+
+  position: relative;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  box-sizing: border-box;
+  padding: 16px;
+  background: radial-gradient(circle at 50% 30%, #3a3a44, #121216 70%);
+  font-family: var(--ios-font);
+}
+body[data-view="landing"] .phone { display: none; }
+/* di dalam ponsel tidak ada nav melayang: back = swipe/Esc, ganti akun = Settings */
+body[data-view="home"] #floating-nav { display: none !important; }
+
+.phone__frame {
+  width: var(--w);
+  max-width: 100%;
+  height: calc(100dvh - 32px);
+  max-height: var(--h);
+  box-sizing: border-box;
+  padding: 12px;
+  overflow: hidden;
+}
+/* tombol samping */
+.phone__frame::before { content: ""; position: absolute; left: -7px; top: 150px; width: 3px; height: 56px; border-radius: 2px 0 0 2px; background: #3a3a42; box-shadow: 0 84px 0 #3a3a42, 0 -48px 0 -8px #3a3a42; }
+.phone__frame::after { content: ""; position: absolute; right: -7px; top: 210px; width: 3px; height: 96px; border-radius: 0 2px 2px 0; background: #3a3a42; }
+
+.phone__screen {
+  position: relative; width: 100%; height: 100%; overflow: hidden;
+  border-radius: var(--radius); background: #f2f2f7; color: #000;
+  transform: translateZ(0); isolation: isolate;
+}
+
+/* layer isi */
+.phone #view-home, .phone .app-layer, .phone .app { position: absolute; inset: 0; box-sizing: border-box; width: 100%; max-width: none; margin: 0; }
+.phone .app { padding-top: var(--sb-h); padding-bottom: var(--home-h); overflow: hidden; }
+
+
+/* ---------- home screen iOS ---------- */
+.phone #view-home {
+  --wallpaper: none;
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  min-height: 0;
+  padding: var(--sb-h) 0 0;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  background-color: #4a5fd6;
+  background-image:
+    var(--wallpaper),
+    radial-gradient(120% 70% at 20% 0%, #7aa2ff 0%, transparent 60%),
+    radial-gradient(100% 60% at 100% 100%, #ff8fb1 0%, transparent 55%),
+    linear-gradient(160deg, #4a5fd6, #8b5cf6 55%, #e879a9);
+  background-size: cover, auto, auto, auto;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.phone #view-home #home-content {
+  height: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+  background: transparent;
+}
+
+.phone #view-home .ios-home {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 2.2dvh, 20px);
+  padding: 10px 20px calc(var(--home-h) + 10px);
+  overflow: hidden;
+  background: transparent;
+}
+
+/* Widgets */
+.phone .ios-widgets {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.4fr);
+  gap: 12px;
+  flex-shrink: 0;
+}
+.phone .widget {
+  min-width: 0;
+  height: 140px;
+  min-height: 140px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 14px;
+  overflow: hidden;
+  border-radius: 23px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.20);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(22px) saturate(1.5);
+  -webkit-backdrop-filter: blur(22px) saturate(1.5);
+}
+
+.phone .widget small {
+  font-size: 11px;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.045em;
+  opacity: 0.9;
+}
+
+.phone .widget--date b {
+  font-size: clamp(42px, 7dvh, 56px);
+  line-height: 0.95;
+  font-weight: 300;
+  letter-spacing: -0.04em;
+}
+
+.phone .widget--date span {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.phone .widget--day strong {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.phone .widget--day span {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 1.35;
+  opacity: 0.9;
+}
+
+/* App grid */
+.phone .ios-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-content: start;
+  justify-items: center;
+  gap: 20px 8px;
+  flex-shrink: 0;
+}
+
+.phone .ios-icon {
+  min-width: 0;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #fff;
+  font: 500 11px var(--ios-font);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.phone .ios-icon .app-tile {
+  position: relative;
+  display: block;
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
+  flex-shrink: 0;
+}
+
+.phone .ios-icon .app-tile > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.phone .ios-dock .app-tile {
+  width: 56px;
+  height: 56px;
+}
+
+.phone .ios-icon__label {
+  max-width: 76px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+}
+
+.phone .ios-icon .badge {
+  position: absolute;
+  top: -6px;
+  right: -7px;
+  min-width: 21px;
+  height: 21px;
+  padding: 0 5px;
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: #ff3b30;
+  color: #fff;
+  font: 600 12px var(--ios-font);
+}
+
+/* Home page indicator dots */
+.phone .ios-dots {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  margin-top: auto;
+  min-height: 7px;
+}
+
+.phone .ios-dots i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.phone .ios-dots i.on {
+  background: #fff;
+}
+
+/* Dock */
+.phone .ios-dock {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-around;
+  gap: 4px;
+  min-height: 78px;
+  padding: 10px 8px;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 27px;
+  background: rgba(255, 255, 255, 0.24);
+  backdrop-filter: blur(26px) saturate(1.6);
+  -webkit-backdrop-filter: blur(26px) saturate(1.6);
+}
+
+.phone .ios-dock .ios-icon {
+  flex: 1;
+}
+
+.phone .ios-dock .app-tile {
+  width: clamp(46px, 13vw, 58px);
+  height: clamp(46px, 13vw, 58px);
+}
+
+/* Viewport pendek: kecilkan elemen agar dock tetap terlihat */
+@media (max-height: 760px) {
+  .phone #view-home .ios-home {
+    gap: 10px;
+    padding-top: 6px;
+    padding-bottom: calc(var(--home-h) + 4px);
+  }
+
+  .phone .ios-widgets {
+    gap: 8px;
+  }
+
+  .phone .widget {
+    height: clamp(92px, 16dvh, 112px);
+    padding: 10px;
+    border-radius: 19px;
+  }
+
+  .phone .widget--date b {
+    font-size: 40px;
+  }
+
+  .phone .ios-grid {
+    gap: 12px 6px;
+  }
+
+  .phone .ios-icon .app-tile {
+    width: 48px;
+    height: 48px;
+  }
+
+  .phone .ios-dock {
+    min-height: 64px;
+    padding: 7px;
+  }
+
+  .phone .ios-dock .app-tile {
+    width: 46px;
+    height: 46px;
+  }
+}
+
+/* status bar & home indicator putih di home screen */
+body[data-view="home"][data-app=""] .statusbar { color: #fff; }
+body[data-view="home"][data-app=""] .phone__home span { background: #fff; }
+
+/* ---------- island, status bar, home indicator ---------- */
+.phone__island { position: absolute; top: 11px; left: 50%; width: 120px; height: 34px; transform: translateX(-50%); background: #000; border-radius: 20px; z-index: 60; pointer-events: none; }
+.statusbar { position: absolute; inset: 0 0 auto 0; height: var(--sb-h); z-index: 50; display: flex; justify-content: space-between; align-items: center; padding: 6px 14px 0; color: #000; font: 600 16px/1 var(--ios-font); pointer-events: none; }
+.statusbar svg { fill: currentColor; }
+.statusbar__zone { pointer-events: auto; appearance: none; border: 0; background: none; color: inherit; font: inherit; display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 14px; cursor: pointer; touch-action: none; }
+.statusbar__zone--l { min-width: 90px; }
+.statusbar__zone--r { justify-content: flex-end; min-width: 100px; }
+.phone__home { position: absolute; left: 0; right: 0; bottom: 0; height: var(--home-h); z-index: 55; display: grid; place-items: center; border: 0; background: none; cursor: pointer; touch-action: none; }
+.phone__home span { width: 134px; height: 5px; border-radius: 3px; background: #000; opacity: .85; }
+.phone__edge { position: absolute; left: 0; top: 90px; bottom: 40px; width: 18px; z-index: 54; touch-action: none; }
+
+/* ---------- notifikasi ---------- */
+.banner-host { position: absolute; top: 8px; left: 8px; right: 8px; z-index: 58; pointer-events: none; }
+.banner-host .notif { pointer-events: auto; animation: banner-in .35s cubic-bezier(.2,.9,.3,1); }
+@keyframes banner-in { from { transform: translateY(-120%); opacity: 0; } to { transform: none; opacity: 1; } }
+.notif { display: flex; gap: 10px; width: 100%; padding: 10px 12px; text-align: left; border: 0; cursor: pointer; border-radius: 22px; background: rgba(255,255,255,.85); backdrop-filter: blur(24px) saturate(1.6); -webkit-backdrop-filter: blur(24px) saturate(1.6); color: #000; font: 400 14px/1.3 var(--ios-font); }
+.notif--banner { margin-top: 44px; box-shadow: 0 8px 28px rgba(0,0,0,.25); }
+.notif__icon { flex: 0 0 38px; width: 38px; height: 38px; display: block; }
+.notif__icon .app-tile, .notif__icon svg { display: block; width: 100%; height: 100%; border-radius: 9px; }
+.notif__main { min-width: 0; flex: 1; display: grid; gap: 2px; }
+.notif__top { display: flex; justify-content: space-between; gap: 8px; }
+.notif__top time { color: #6b6b72; font-size: 12px; }
+.notif__body { color: #333; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+
+.sheet-scrim { position: absolute; inset: 0; z-index: 56; background: rgba(0,0,0,.35); backdrop-filter: blur(6px); }
+.sheet { position: absolute; left: 0; right: 0; top: 0; z-index: 57; max-height: 86%; overflow-y: auto; padding: calc(var(--sb-h) + 6px) 14px 22px; border-radius: 0 0 32px 32px; background: rgba(242,242,247,.92); backdrop-filter: blur(30px) saturate(1.5); -webkit-backdrop-filter: blur(30px) saturate(1.5); transform: translateY(-102%); transition: transform .22s ease; font: 400 15px/1.35 var(--ios-font); color: #000; }
+.sheet.is-open { transform: none; }
+.sheet__head { display: flex; align-items: baseline; justify-content: space-between; margin: 4px 4px 12px; }
+.sheet__head h2 { margin: 0; font-size: 28px; font-weight: 700; }
+.sheet__head small { color: #6b6b72; }
+.sheet__list { display: grid; gap: 8px; }
+.sheet__empty { text-align: center; color: #6b6b72; padding: 40px 0; }
+.tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.tile { display: grid; gap: 6px; justify-items: start; padding: 14px; border: 0; border-radius: 20px; cursor: pointer; background: #fff; font: 600 14px var(--ios-font); color: #000; }
+.tile b { font-size: 22px; }
+.tile.is-on { background: #5856d6; color: #fff; }
+
+/* ---------- Settings (grouped list ala iOS) ---------- */
+.phone .app--settings { background: #f2f2f7; color: #000; padding-top: var(--sb-h); font-family: var(--ios-font); }
+.ios-settings { min-height: 100%; }
+.ios-page { padding: 0 16px 24px; }
+.ios-large { margin: 6px 4px 10px; font-size: 34px; font-weight: 700; letter-spacing: -.02em; }
+.ios-search { display: flex; gap: 6px; align-items: center; margin-bottom: 16px; padding: 9px 12px; border-radius: 12px; background: rgba(118,118,128,.12); color: #8e8e93; font-size: 16px; }
+.ios-card { display: flex; align-items: center; gap: 14px; width: 100%; padding: 12px 14px; margin-bottom: 22px; border: 0; border-radius: 14px; background: #fff; text-align: left; cursor: pointer; font: inherit; color: inherit; }
+.ios-card__txt { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.ios-card__txt strong { font-size: 20px; font-weight: 500; }
+.ios-card__txt small { color: #6b6b72; font-size: 13px; line-height: 1.3; }
+.ios-chev { color: #c4c4c8; font-size: 22px; line-height: 1; }
+.ios-group { list-style: none; margin: 0 0 22px; padding: 0; border-radius: 14px; overflow: hidden; background: #fff; }
+.ios-group > li + li { border-top: .5px solid #e1e1e6; }
+.ios-row { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 46px; padding: 8px 14px; border: 0; background: none; text-align: left; cursor: pointer; font: 400 17px var(--ios-font); color: #000; }
+.ios-row--static { cursor: default; }
+.ios-row--danger { color: #ff3b30; justify-content: center; }
+.ios-row__t { flex: 1; }
+.ios-row__stack { flex: 1; display: grid; gap: 1px; min-width: 0; }
+.ios-row__stack b { font-weight: 500; }
+.ios-row__stack small { color: #8e8e93; font-size: 13px; }
+.ios-val { color: #8e8e93; }
+.ios-check { color: #007aff; font-size: 20px; font-weight: 600; }
+.ios-ico { width: 30px; height: 30px; border-radius: 7px; display: grid; place-items: center; font-size: 16px; color: #fff; }
+.ios-switch { width: 51px; height: 31px; border-radius: 16px; background: #e9e9ea; position: relative; transition: background .2s; flex: 0 0 51px; }
+.ios-switch i { position: absolute; top: 2px; left: 2px; width: 27px; height: 27px; border-radius: 50%; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,.25); transition: transform .2s; }
+.ios-switch.is-on { background: #34c759; }
+.ios-switch.is-on i { transform: translateX(20px); }
+.ios-nav { position: sticky; top: 0; z-index: 2; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 4px 8px 8px; background: rgba(242,242,247,.92); backdrop-filter: blur(16px); }
+.ios-nav h2 { margin: 0; font-size: 17px; font-weight: 600; }
+.ios-back { justify-self: start; border: 0; background: none; color: #007aff; font: 400 17px var(--ios-font); cursor: pointer; padding: 6px; }
+.ios-hero { display: grid; justify-items: center; gap: 4px; padding: 10px 0 20px; text-align: center; }
+.ios-hero h3 { margin: 8px 0 0; font-size: 22px; font-weight: 600; }
+.ios-hero p { margin: 0; color: #8e8e93; }
+.ios-label { margin: 0 14px 6px; color: #6b6b72; font-size: 13px; text-transform: uppercase; }
+.ios-foot { margin: -12px 14px 20px; color: #6b6b72; font-size: 13px; line-height: 1.4; }
+
+/* layar kecil: tanpa bezel */
+@media (max-width: 520px) {
+  .phone { padding: 0; background: #f2f2f7; --sb-h: 44px; }
+  .phone__frame { width: 100%; height: 100dvh; padding: 0; border-radius: 0; box-shadow: none; background: none; }
+  .phone__frame::before, .phone__frame::after { display: none; }
+  .phone__screen { border-radius: 0; }
+  .phone__island { display: none; }
+  .statusbar { padding-top: env(safe-area-inset-top, 0); }
+}
+/* home meredup saat app terbuka (pengganti .home.is-covered) */
+.phone #view-home .ios-home { transition: transform .45s var(--ease), filter .45s; }
+.phone #view-home.is-covered .ios-home { transform: scale(.94); filter: blur(4px); }
+
+/* X itu hitam: status bar dan indikator jadi putih */
+body[data-app="twitter"] .statusbar { color: #fff; }
+body[data-app="twitter"] .phone__home span { background: #fff; }
+/* wallpaper dari Firestore harus terlihat: layer di atas #view-home dibuat transparan */
+.phone #view-home #home-content,
+.phone #view-home .home,
+.phone #view-home .ios-home {
+  background: transparent;
+  background-image: none;
+}
+.phone #view-home .home::before,
+.phone #view-home .home::after {
+  background: none;
+  content: none;
+}
+/* ---------- scroll di dalam app ---------- */
+/* Home tetap tidak scroll (seperti iOS). App boleh scroll vertikal. */
+.phone .app {
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;      /* scroll tidak "bocor" ke halaman di belakang */
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;               /* swipe vertikal = scroll */
+  scrollbar-width: none;             /* Firefox */
+}
+.phone .app::-webkit-scrollbar { display: none; }
+
+/* wadah scroll internal app (daftar chat, feed, galeri) juga harus bisa scroll */
+.phone .app [class*="__list"],
+.phone .app [class*="__body"],
+.phone .app [class*="__scroll"],
+.phone .app [class*="feed"] {
+  min-height: 0;
+  overscroll-behavior: contain;
+}
+
+/* settings punya padding-top sendiri; biarkan scroll di dalam .app */
+.phone .app--settings { overflow-y: auto; }
+/* ---------- status bar: blur konten di belakangnya (ala iOS) ---------- */
+.phone { --sb-tint: rgba(242, 242, 247, .55); }
+
+.statusbar::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 -10px 0;               /* sedikit melewati batas bawah supaya pudarnya halus */
+  z-index: -1;                      /* di belakang jam & ikon, di atas konten app */
+  background: var(--sb-tint);
+  backdrop-filter: blur(18px) saturate(1.6);
+  -webkit-backdrop-filter: blur(18px) saturate(1.6);
+  -webkit-mask-image: linear-gradient(#000 65%, transparent);
+          mask-image: linear-gradient(#000 65%, transparent);
+  pointer-events: none;
+}
+
+/* X berlatar hitam: tint gelap */
+body[data-app="twitter"] .phone { --sb-tint: rgba(0, 0, 0, .55); }
+
+/* Home screen: tanpa blur, wallpaper tampil penuh */
+body[data-view="home"][data-app=""] .statusbar::before { display: none; }
+/* ---------- panggilan masuk ---------- */
+.call {
+  position: absolute; inset: 0; z-index: 49;   /* di bawah status bar (50) dan island (60) */
+  display: flex; flex-direction: column; justify-content: space-between; align-items: center;
+  padding: calc(var(--sb-h) + 70px) 24px calc(var(--home-h) + 56px);
+  background: linear-gradient(180deg, #1f2c34, #0b141a);
+  color: #fff; text-align: center;
+  animation: call-in .3s ease;
+}
+@keyframes call-in { from { opacity: 0; transform: scale(1.04); } to { opacity: 1; transform: none; } }
+.call__top { display: grid; justify-items: center; gap: 10px; }
+.call__top h2 { margin: 12px 0 0; font-size: 30px; font-weight: 600; }
+.call__status { margin: 0; color: rgba(255,255,255,.7); font-size: 16px; font-variant-numeric: tabular-nums; }
+.call__avatar { animation: call-pulse 1.6s ease-out infinite; }
+@keyframes call-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255,255,255,.35); }
+  100% { box-shadow: 0 0 0 28px rgba(255,255,255,0); }
+}
+.call__hint, .call__note {
+  margin: 0; max-width: 290px; padding: 10px 14px; border-radius: 14px;
+  background: rgba(255,255,255,.1); font-size: 14px; line-height: 1.4;
+}
+.call__actions { display: flex; justify-content: space-around; width: 100%; max-width: 300px; }
+.call__actions--end { justify-content: center; }
+.call__btn { display: grid; justify-items: center; gap: 8px; border: 0; background: none; color: #fff; font: 500 13px var(--ios-font); cursor: pointer; }
+.call__btn span { width: 68px; height: 68px; border-radius: 50%; display: grid; place-items: center; font-size: 28px; }
+.call__btn--accept span { background: #25d366; }
+.call__btn--decline span { background: #ff3b30; }
+.call__btn.is-shake { animation: call-shake .4s; }
+@keyframes call-shake { 20%, 60% { transform: translateX(-8px); } 40%, 80% { transform: translateX(8px); } }
+
+/* status bar putih dan tanpa blur terang selama panggilan */
+body[data-call] .statusbar { color: #fff; }
+body[data-call] .statusbar::before { display: none; }
+body[data-call] .phone__home span { background: #fff; }
+/* Home screen menyesuaikan viewport pendek */
+@media (max-height: 760px) {
+  .phone {
+    --sb-h: 44px;
+    --home-h: 24px;
+  }
+
+  .ios-home {
+    gap: 10px;
+    padding-bottom: calc(var(--home-h) + 4px);
+  }
+
+  .ios-widgets {
+    gap: 8px;
+  }
+
+  .widget {
+    min-height: 100px;
+    padding: 10px;
+  }
+
+  .ios-grid {
+    gap: 12px 8px;
+  }
+
+  .ios-icon .app-tile {
+    width: 52px;
+    height: 52px;
+  }
+
+  .ios-dock {
+    padding: 8px;
+  }
+    .phone #view-home .ios-home {
+    gap: 12px;
+    padding-top: 8px;
+    padding-bottom: calc(var(--home-h) + 4px);
+  }
+
+  .phone .ios-widgets {
+    gap: 8px;
+  }
+
+  .phone .ios-grid {
+    gap: 14px 8px;
+  }
+
+  .phone .ios-dock {
+    min-height: 76px;
+    padding: 8px;
+  }
+}
+@media (max-width: 520px) {
+  .phone {
+    padding: 0;
+    --sb-h: 44px;
+    --home-h: 24px;
+  }
+
+  .phone__frame {
+    width: 100%;
+    height: 100dvh;
+    max-height: none;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}

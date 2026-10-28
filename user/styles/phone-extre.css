@@ -1,0 +1,15 @@
+/* Tambahkan ke stylesheet utama (atau <link> setelahnya). Hanya untuk fitur baru. */
+.msg--call .msg__bubble{min-width:170px}
+.msg__call{display:flex;align-items:center;gap:8px;margin:0;font-weight:600}
+.msg__call-ico{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#0001}
+.msg__call--missed{color:#d93025}.msg__call--missed .msg__call-ico{background:#d9302522}
+.x-lock{display:inline-flex;vertical-align:-2px;opacity:.7}
+.x-repost-label,.x-reply-to{margin:0 0 4px;font-size:12.5px;opacity:.7;display:flex;gap:6px;align-items:center}
+.x-reply-to .mention{color:var(--x-accent,#1d9bf0)}
+.x-quote{border:1px solid #8883;border-radius:14px;padding:10px 12px;margin:8px 0;display:grid;gap:6px}
+.x-quote p{margin:0}.x-quote__head{display:flex;gap:6px;align-items:center;font-size:13px}.x-quote__head span{opacity:.65}
+.x-quote--gone{display:flex;gap:8px;align-items:center;font-size:13px;opacity:.75}
+.x-media{display:grid;gap:3px;border-radius:14px;overflow:hidden;margin:8px 0}
+.x-media--2,.x-media--3,.x-media--4{grid-template-columns:1fr 1fr}.x-media--3 img:first-child{grid-row:span 2}
+.x-media img{width:100%;height:100%;object-fit:cover;max-height:300px}.x-media--1 img{max-height:420px}
+.account-switch--accounts{margin-top:6px}

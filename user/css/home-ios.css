@@ -1,0 +1,520 @@
+/* =========================================================
+   HOME SCREEN iOS — satu-satunya sumber gaya untuk home.
+   Muat PALING AKHIR (setelah main, apps, phone, dll).
+   Semua class berawalan "hs-".
+   Sistem ukuran (semua turunan dari 3 variabel di .hs):
+     --pad  = margin aman kiri-kanan
+     --gap  = jarak antar kolom
+     --icon = lebar ikon = (lebar - 2*pad - 3*gap) / 4
+   Widget kecil = 2 kolom, widget musik = 4 kolom, dock memakai --icon yang sama.
+   ========================================================= */
+
+.phone #view-home { padding: 0; overflow: hidden; }
+
+.phone #view-home #home-content {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  container-type: size;
+}
+
+.hs {
+  --pad: 6.5cqw;
+  --gap: 4.5cqw;
+  --icon: calc((100cqw - 2 * var(--pad) - 3 * var(--gap)) / 4);
+  --radius-icon: calc(var(--icon) * .225);
+  --radius-widget: calc(var(--icon) * .36);
+  --row-gap: clamp(12px, 2.2cqh, 20px);
+
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--sb-h) + 8px) var(--pad) calc(var(--home-h) + 4px);
+  color: #fff;
+  font-family: var(--ios-font, -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- widgets (kolom sama dengan ikon) ---------- */
+.hs-widgets {
+  display: grid;
+  grid-template-columns: repeat(4, var(--icon));
+  column-gap: var(--gap);
+  row-gap: var(--row-gap);
+  justify-content: start;
+}
+
+.hs-cell {
+  display: grid;
+  grid-column: span 2;
+  gap: 6px;
+  min-width: 0;
+  align-content: start;
+}
+
+.hs-widget {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  aspect-ratio: 1 / 1;
+  padding: calc(var(--icon) * .24);
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-widget);
+  text-align: left;
+  font: inherit;
+}
+
+/* Weather */
+.hs-wx {
+  color: #fff;
+  background: linear-gradient(180deg, #1c5ca8 0%, #4a8fd3 62%, #7bb5e6 100%);
+}
+.hs-wx.is-night { background: linear-gradient(180deg, #0c1a3d 0%, #223868 68%, #3a4e86 100%); }
+
+.hs-wx__place {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  font-size: calc(var(--icon) * .24);
+  font-weight: 600;
+  line-height: 1.15;
+}
+.hs-wx__place svg { flex: none; }
+.hs-wx__name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hs-wx__temp {
+  margin-top: 2px;
+  font-size: calc(var(--icon) * .68);
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -1.5px;
+}
+.hs-wx__cond {
+  display: grid;
+  gap: 2px;
+  margin-top: auto;
+  font-size: calc(var(--icon) * .2);
+  font-weight: 500;
+  line-height: 1.2;
+}
+.hs-wx__icon { font-size: calc(var(--icon) * .28); line-height: 1; }
+
+/* Calendar */
+.hs-cal {
+  align-items: flex-start;
+  color: #1c1c1e;
+  background: #fff;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.hs-cal__dow {
+  color: #ff3b30;
+  font-size: calc(var(--icon) * .19);
+  font-weight: 700;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+.hs-cal__num {
+  margin-top: 1px;
+  font-size: calc(var(--icon) * .68);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -1px;
+}
+.hs-cal__ev {
+  display: -webkit-box;
+  margin-top: auto;
+  overflow: hidden;
+  color: #8e8e93;
+  font-size: calc(var(--icon) * .22);
+  font-weight: 500;
+  line-height: 1.2;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+/* ---------- music widget (selebar 4 kolom) ---------- */
+.hs-music {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  height: calc(var(--icon) * 1.45);
+  margin-top: var(--row-gap);
+  padding: 0 calc(var(--icon) * .2);
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: var(--radius-widget);
+  background: rgba(32, 32, 36, .62);
+  -webkit-backdrop-filter: blur(24px) saturate(1.35);
+  backdrop-filter: blur(24px) saturate(1.35);
+}
+.hs-music__browse {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+.hs-music__art {
+  display: grid;
+  flex: none;
+  width: calc(var(--icon) * .72);
+  height: calc(var(--icon) * .72);
+  place-items: center;
+  border-radius: calc(var(--icon) * .18);
+  background: linear-gradient(145deg, #7771aa, #34344e 65%, #21212a);
+}
+.hs-music__art svg { width: 50%; height: 50%; fill: none; stroke: #fff; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.hs-music__copy { display: grid; min-width: 0; gap: 4px; }
+.hs-music__title,
+.hs-music__status { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hs-music__title { font-size: 13px; font-weight: 600; }
+.hs-music__status { color: rgba(255, 255, 255, .68); font-size: 11px; }
+.hs-music__control {
+  display: grid;
+  flex: none;
+  width: calc(var(--icon) * .6);
+  height: calc(var(--icon) * .6);
+  margin-left: 8px;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .14);
+  color: #fff;
+  cursor: pointer;
+}
+.hs-music__control:disabled { opacity: .58; }
+.hs-music__control svg { width: 50%; height: 50%; fill: currentColor; }
+.hs-widget-label {
+  align-self: center;
+  margin-top: 6px;
+  color: rgba(255, 255, 255, .8);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .45);
+}
+
+/* ---------- grid aplikasi (4 kolom persis, lebar = --icon) ---------- */
+.hs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, var(--icon));
+  column-gap: var(--gap);
+  row-gap: var(--row-gap);
+  justify-content: start;
+  align-content: start;
+  margin-top: 22px;
+}
+
+.hs-pages {
+  width: 100%;
+  margin-top: 22px;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+.hs-page-track {
+  display: flex;
+  width: 100%;
+  transition: transform .28s cubic-bezier(.2,.8,.2,1);
+}
+.hs-grid--page {
+  flex: 0 0 100%;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 0;
+}
+
+.hs-icon {
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  width: var(--icon);
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hs-icon .app-tile {
+  position: relative;
+  display: block;
+  width: var(--icon);
+  height: var(--icon);
+  border-radius: var(--radius-icon);
+  box-shadow: none;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .2));
+  transition: transform .14s ease;
+}
+.hs-icon .app-tile > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+.hs-icon:active .app-tile { transform: scale(.9); }
+
+.hs-icon__label {
+  /* label boleh sedikit lebih lebar dari ikon, tetap di tengah */
+  width: calc(var(--icon) + var(--gap));
+  margin-inline: calc(var(--gap) / -2);
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: clamp(10px, 3.1cqw, 12.5px);
+  font-weight: 500;
+  line-height: 1.2;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+}
+
+.hs .badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border: 0;
+  border-radius: 11px;
+  background: #ff3b30;
+  color: #fff;
+  font: 600 13px/1 var(--ios-font, -apple-system, system-ui, sans-serif);
+  box-shadow: none;
+}
+
+/* ---------- dots, search & dock ---------- */
+.hs-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 12px;
+}
+.hs-dots button {
+  display: block;
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .42);
+  cursor: pointer;
+}
+.hs-dots button.is-active { background: #fff; }
+
+.hs-search-empty {
+  margin: 8px 0 0;
+  color: rgba(255, 255, 255, .78);
+  font-size: 13px;
+  text-align: center;
+}
+.hs-search {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  box-sizing: border-box;
+  width: min(190px, 70%);
+  height: 36px;
+  gap: 8px;
+  margin: 8px 0 clamp(14px, 2.4cqh, 22px);
+  padding: 0 13px;
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .22);
+  color: rgba(255, 255, 255, .9);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  backdrop-filter: blur(24px) saturate(1.4);
+}
+.hs-search > svg {
+  flex: none;
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+.hs-search__input {
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: inherit;
+  font: 500 12px/1 var(--ios-font, -apple-system, system-ui, sans-serif);
+}
+.hs-search__input::placeholder { color: rgba(255, 255, 255, .82); opacity: 1; }
+.hs-search__input::-webkit-search-cancel-button { cursor: pointer; }
+
+/* Dock: ikon = ukuran --icon yang sama, dock sedikit lebih lebar dari area ikon seperti iOS */
+.hs-dock {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-self: stretch;
+  box-sizing: border-box;
+  margin-inline: calc(var(--pad) * -.45);
+  padding: calc(var(--icon) * .2) calc(var(--pad) * .55 + var(--pad) * .45);
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: calc(var(--icon) * .5);
+  background: rgba(255, 255, 255, .24);
+  -webkit-backdrop-filter: blur(28px) saturate(1.6);
+  backdrop-filter: blur(28px) saturate(1.6);
+}
+.hs-dock .hs-icon { width: var(--icon); }
+.hs-dock .hs-icon__label { display: none; }
+
+/* ---------- layar pendek: perkecil semua ikon & widget secara seragam ---------- */
+@container (max-height: 720px) {
+  .hs { --pad: 8cqw; --gap: 5.5cqw; }
+  .hs-grid { margin-top: 14px; }
+  .hs-search { height: 32px; margin-bottom: 10px; }
+}
+@container (max-height: 620px) {
+  .hs { --pad: 10cqw; --gap: 6.5cqw; }
+  .hs-music { height: calc(var(--icon) * 1.2); }
+  .hs-dots { padding-top: 6px; }
+}
+
+/* ---------- efek saat app terbuka ---------- */
+.phone #view-home .hs { transition: transform .45s var(--ease, ease), filter .45s; }
+.phone #view-home.is-covered .hs { transform: scale(.94); filter: blur(4px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hs-icon .app-tile, .phone #view-home .hs { transition: none; }
+}
+
+/* ===== Kolom seragam: widget, ikon, dock selalu sejajar ===== */
+.hs { --dockpad: 3.4cqw; }
+
+.hs-widgets,
+.hs-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+.hs-icon { width: 100%; }
+.hs-icon .app-tile {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border-radius: 22.5%;
+}
+
+.hs-dock {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: var(--gap);
+  align-self: stretch;
+  margin-inline: calc(var(--dockpad) * -1);
+  padding: 3.2cqw var(--dockpad);
+  border-radius: 9cqw;
+}
+.hs-dock .hs-icon { width: 100%; }
+
+/* ===== Widget musik: gaya "Now Playing" iPhone ===== */
+.hs-music {
+  position: relative;
+  height: auto;
+  margin-top: var(--row-gap);
+  padding: 4cqw;
+  border: 0;
+  border-radius: var(--radius-widget);
+  background: linear-gradient(160deg, rgba(74, 74, 82, .82), rgba(38, 38, 44, .86));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08), 0 8px 24px rgba(0, 0, 0, .25);
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+  backdrop-filter: blur(28px) saturate(1.5);
+}
+
+/* ikon not musik kanan atas */
+.hs-music::after {
+  content: "";
+  position: absolute;
+  top: 3.6cqw;
+  right: 4cqw;
+  width: 6cqw;
+  height: 6cqw;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18V5l12-2v13'/%3E%3Ccircle cx='6' cy='18' r='3' fill='white'/%3E%3Ccircle cx='18' cy='16' r='3' fill='white'/%3E%3C/svg%3E") center / contain no-repeat;
+  pointer-events: none;
+}
+
+.hs-music__browse {
+  display: grid;
+  grid-template-columns: 34% minmax(0, 1fr);
+  align-items: center;
+  column-gap: 4cqw;
+  width: 100%;
+}
+
+.hs-music__art {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border-radius: 4.2cqw;
+  background:
+    radial-gradient(circle at 28% 22%, rgba(255, 255, 255, .35), transparent 45%),
+    linear-gradient(145deg, #9a86ff, #5340c4 55%, #271f5c);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, .4);
+}
+.hs-music__art svg { width: 42%; height: 42%; stroke-width: 1.5; }
+
+.hs-music__copy { gap: 1.2cqw; align-content: center; padding-right: 5cqw; }
+.hs-music__copy::before {
+  content: "NOW PLAYING";
+  color: rgba(255, 255, 255, .6);
+  font-size: 2.6cqw;
+  font-weight: 600;
+  letter-spacing: .08em;
+}
+.hs-music__title { font-size: 4.8cqw; font-weight: 700; line-height: 1.15; }
+.hs-music__status { font-size: 3.4cqw; color: rgba(255, 255, 255, .68); }
+
+/* tombol pil di bawah teks (bagian dari tombol browse, jadi bisa diklik) */
+.hs-music__copy::after {
+  content: "\25B6\FE0E\00a0 Open";
+  justify-self: start;
+  margin-top: 1.6cqw;
+  padding: 1.9cqw 4cqw;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .17);
+  font-size: 3.4cqw;
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* tombol play lama disembunyikan (disabled, dan sudah digantikan pil) */
+.hs-music__control { display: none; }
+/* ===== Halaman: tiap page membawa isinya sendiri ===== */
+.hs-pages { flex: 1; min-height: 0; overflow: hidden; }
+.hs-page-track { display: flex; height: 100%; transition: transform .35s ease; }
+.hs-page { flex: 0 0 100%; min-width: 0; height: 100%; display: flex; flex-direction: column; overflow: hidden; }
+.hs-page--apps .hs-grid { margin-top: 0; }
