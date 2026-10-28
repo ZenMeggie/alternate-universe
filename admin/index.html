@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Story CMS — Admin</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="./admin.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div><span class="eyebrow">CONTENT MANAGEMENT</span><h1>Story CMS</h1></div>
+      <div class="top-actions"><span id="user-label" class="muted"></span><button id="logout-btn" class="button secondary hidden">Keluar</button></div>
+    </header>
+
+    <section id="login-panel" class="panel login-panel">
+      <h2>Masuk admin</h2>
+      <p class="muted">Gunakan akun Firebase Authentication yang UID-nya sudah terdaftar sebagai admin.</p>
+      <form id="login-form">
+        <label>Email<input id="login-email" type="email" autocomplete="username" required></label>
+        <label>Password<input id="login-password" type="password" autocomplete="current-password" required></label>
+        <button class="button primary" type="submit">Masuk</button>
+        <p id="login-error" class="error" role="alert"></p>
+      </form>
+    </section>
+
+    <main id="admin-panel" class="hidden">
+      <div class="layout">
+        <aside class="panel sidebar">
+          <div class="section-heading"><h2>Stories</h2><button id="new-story-btn" class="button primary small">+ Baru</button></div>
+          <div id="story-list" class="story-list"><p class="muted">Memuat cerita…</p></div>
+          <div class="sidebar-divider"></div>
+          <div class="section-heading"><h2>Karakter</h2><button id="open-characters-btn" class="button secondary small">Kelola</button></div>
+          <p class="muted">Karakter dapat digunakan kembali pada semua cerita dan bubble chat.</p>
+          <div class="sidebar-divider"></div>
+          <div class="section-heading"><h2>Data ponsel</h2></div>
+          <label class="sr-only" for="data-nav-search">Cari kategori data</label>
+          <input id="data-nav-search" type="search" placeholder="Cari kategori data…">
+          <div id="data-nav" class="data-nav"></div>
+        </aside>
+
+        <section class="workspace">
+          <section id="character-panel" class="panel hidden">
+            <div class="section-heading"><h2>Manajemen karakter</h2><button id="back-to-stories-btn" class="button secondary small">Kembali ke cerita</button></div>
+            <div class="character-layout">
+              <div>
+                <div class="section-heading"><h3>Daftar karakter</h3><button id="new-character-btn" class="button primary small">+ Karakter</button></div>
+                <div id="character-list" class="character-list"></div>
+              </div>
+              <form id="character-form" class="form-grid character-form">
+                <h3 class="span-2" id="character-form-title">Karakter baru</h3>
+                <label>ID karakter (slug)<input id="character-id" maxlength="48" placeholder="eve (dipakai di data cerita; tidak bisa diubah)"></label>
+                <label>Nama tampilan<input id="character-name" required maxlength="100" placeholder="Eve"></label>
+                <label>Username / handle utama<input id="character-username" maxlength="80" placeholder="@eve"></label>
+                <label>No. telepon<input id="character-phone" maxlength="40" placeholder="+62 ..."></label>
+                <label>Area / lokasi<input id="character-location" maxlength="120" placeholder="Batam"></label>
+                <label>Warna aksen<input id="character-accent" type="color" value="#128c7e"></label>
+                <label class="check"><input id="character-playable" type="checkbox"> Bisa dipilih di ponsel (akun WhatsApp / X)</label>
+                <label class="check"><input id="character-hide-in-cast" type="checkbox"> Sembunyikan dari daftar “Also in this story” (karakter pendukung)</label>
+                <label class="span-2">Status / about<input id="character-about" maxlength="200"></label>
+                <label class="span-2">Tagline<input id="character-tagline" maxlength="180" placeholder="Kalimat singkat yang tampil di kartu karakter"></label>
+                <label>Nama lengkap<input id="character-fullname" maxlength="120"></label>
+                <label>Umur<input id="character-age" maxlength="30" placeholder="21 tahun"></label>
+                <label>Pekerjaan / peran<input id="character-role" maxlength="120"></label>
+                <label>Pronouns<input id="character-pronouns" maxlength="40" placeholder="she/her"></label>
+                <label class="span-2">Bio<textarea id="character-bio" rows="3" placeholder="Informasi karakter…"></textarea></label>
+                <label class="span-2">Foto profil<input id="character-photo" type="file" accept="image/*"></label>
+                <div id="character-photo-preview-wrap" class="span-2 hidden"><img id="character-photo-preview" class="character-photo-preview" alt="Preview foto karakter"></div>
+                <label class="span-2">URL foto profil<input id="character-photo-url" type="url" placeholder="Terisi otomatis setelah upload"></label>
+                <label class="span-2">Wallpaper ponsel<input id="character-wallpaper" type="file" accept="image/*"></label>
+                <div id="character-wallpaper-preview-wrap" class="span-2 hidden"><img id="character-wallpaper-preview" class="character-photo-preview" alt="Preview wallpaper"></div>
+                <label class="span-2">URL wallpaper<input id="character-wallpaper-url" type="url" placeholder="Terisi otomatis setelah upload"></label>
+                <div class="span-2 x-accounts-box">
+                  <div class="section-heading"><h3>Akun X (boleh lebih dari satu)</h3><button id="add-x-account-btn" class="button secondary small" type="button">+ Akun X</button></div>
+                  <div id="x-accounts" class="x-accounts"></div>
+                </div>
+                <div class="form-actions span-2">
+                  <button class="button primary" type="submit">Simpan karakter</button>
+                  <button id="delete-character-btn" class="button danger" type="button">Hapus karakter</button>
+                </div>
+                <p class="muted span-2">Menghapus karakter tidak otomatis menghapus bubble yang sudah memakai karakter tersebut.</p>
+              </form>
+            </div>
+          </section>
+          <section id="data-panel" class="panel hidden">
+            <div class="section-heading"><h2 id="data-title">Data</h2><button id="data-back-btn" class="button secondary small" type="button">Kembali ke cerita</button></div>
+            <p id="data-hint" class="muted"></p>
+            <p id="data-dirty-status" class="unsaved-note hidden" role="status">Perubahan belum disimpan. Simpan sebelum berpindah agar isian tidak hilang.</p>
+            <section id="message-workflow" class="message-workflow hidden" aria-labelledby="message-workflow-title">
+              <div>
+                <h3 id="message-workflow-title">Pesan WhatsApp</h3>
+                <p id="message-chat-summary" class="muted">Pilih percakapan untuk melihat dan menambahkan pesan.</p>
+              </div>
+              <label for="message-chat-filter">1. Pilih percakapan<select id="message-chat-filter"></select></label>
+              <label for="message-preview-character">2. Lihat sebagai<select id="message-preview-character"></select></label>
+              <div class="message-workflow__actions">
+                <button id="bulk-chat-btn" class="button primary small" type="button">Tambah beberapa pesan</button>
+                <button id="message-chat-create" class="button secondary small" type="button">Kelola / buat chat</button>
+              </div>
+            </section>
+            <div class="character-layout">
+              <div>
+                <div class="section-heading"><input id="data-search" type="search" placeholder="Cari…"><button id="data-new-btn" class="button primary small" type="button">+ Baru</button></div>
+                <div id="data-list" class="character-list"></div>
+              </div>
+              <form id="data-form" class="form-grid character-form"></form>
+            </div>
+          </section>
+          <div id="empty-state" class="panel empty-state">
+            <div class="empty-icon">✦</div><h2>Pilih atau buat cerita</h2><p class="muted">Data tersimpan di Firestore. Gambar diunggah ke Cloudinary.</p>
+          </div>
+
+          <div id="editor" class="hidden">
+            <section class="panel">
+              <div class="section-heading"><h2>Informasi cerita</h2><span id="story-status" class="status"></span></div>
+              <form id="story-form" class="form-grid">
+                <label>Judul<input id="story-title" required maxlength="140"></label>
+                <label>Subtitle<input id="story-subtitle" maxlength="220"></label>
+                <label class="span-2">Deskripsi<textarea id="story-description" rows="3"></textarea></label>
+                <label>URL cover<input id="story-cover" type="url" placeholder="https://…"></label>
+                <label>Status<select id="story-publish"><option value="draft">Draft</option><option value="published">Published</option></select></label>
+                <div class="form-actions span-2">
+                  <button class="button primary" type="submit">Simpan cerita</button>
+                  <button id="delete-story-btn" class="button danger" type="button">Hapus cerita</button>
+                </div>
+              </form>
+            </section>
+
+            <section class="panel">
+              <div class="section-heading"><h2>Bab</h2><button id="new-chapter-btn" class="button primary small">+ Bab</button></div>
+              <div id="chapter-list" class="chapter-list"></div>
+            </section>
+
+            <section id="chapter-editor" class="panel hidden">
+              <div class="section-heading"><h2 id="chapter-editor-title">Editor bab</h2><button id="close-chapter-btn" class="button secondary small" type="button">Tutup</button></div>
+              <form id="chapter-form" class="form-grid">
+                <label>Part / nomor<input id="chapter-part" required placeholder="Part 1"></label>
+                <label>Judul bab<input id="chapter-title" required maxlength="140"></label>
+                <label>Subtitle<input id="chapter-subtitle" placeholder="Keterangan singkat untuk pembaca"></label>
+                <div class="span-2">
+                  <span class="lbl">Lokasi untuk cuaca *</span>
+                  <div class="field-row"><input id="chapter-location" readonly placeholder="Pilih lokasi lewat peta"><button id="chapter-location-picker" class="button secondary small" type="button">Pilih di peta</button></div>
+                  <input id="chapter-location-lat" type="hidden"><input id="chapter-location-lng" type="hidden">
+                  <small id="chapter-location-coords" class="muted">Koordinat belum dipilih.</small>
+                </div>
+                <label>Tanggal timeline<input id="chapter-date" type="date" required><small class="muted">Tanggal mengatur hari timeline. Jam diatur di event timeline.</small></label>
+                <label>POV<input id="chapter-pov" placeholder="Eve"></label>
+                <label>Alignment default<select id="chapter-alignment"><option>left</option><option>center</option><option>right</option><option>justify</option></select></label>
+                <label>Status<select id="chapter-status"><option value="draft">Draft</option><option value="published">Published</option><option value="coming-soon">Coming Soon</option></select></label>
+                <label>Urutan<input id="chapter-order" type="number" min="0" step="1" value="1"></label>
+                <div class="form-actions span-2">
+                  <button class="button primary" type="submit">Simpan bab</button>
+                  <button id="delete-chapter-btn" class="button danger" type="button">Hapus bab</button>
+                </div>
+              </form>
+              <p class="muted small-text">Tanggal dan lokasi part menjadi sumber timeline dan cuaca di ponsel. Part harus memiliki tanggal dan lokasi peta sebelum disimpan sebagai Published atau Coming Soon. Jam cuaca mengikuti event paling awal pada hari itu; jika belum ada event, cuaca memakai pukul 12.00.</p>
+              <div class="blocks-heading"><h3>Blok konten</h3><div class="inline-controls"><select id="new-block-type" aria-label="Jenis blok"><option value="paragraph">Narasi</option><option value="heading">Heading</option><option value="location">Lokasi</option><option value="italic">Teks italic</option><option value="dialogue">Dialog</option><option value="image">Gambar</option><option value="chat">Chat</option><option value="call">Panggilan</option></select><button id="add-block-btn" class="button primary small" type="button">+ Blok</button><button id="add-chat-pick-btn" class="button secondary small" type="button">+ Chat dari WhatsApp</button></div></div>
+              <p class="muted small-text">Urutan konten mengikuti nomor urutan. Pada blok Chat, pilih pesan WhatsApp terkait agar bubble bisa membuka chat aslinya di aplikasi simulasi.</p>
+              <div id="block-list" class="block-list"></div>
+            </section>
+          </div>
+        </section>
+      </div>
+    </main>
+    <div id="map-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-label="Pilih lokasi di peta">
+      <div class="modal-box">
+        <div class="section-heading"><h2>Pilih lokasi di peta</h2><button id="map-cancel" class="button secondary small" type="button">Batal</button></div>
+        <div class="map-search"><input id="map-search" placeholder="Cari tempat (mis. Nagoya Hill Batam)"><button id="map-search-btn" class="button secondary small" type="button">Cari</button></div>
+        <div id="map-results" class="map-results"></div>
+        <div id="map-canvas" class="map-canvas"></div>
+        <div class="map-foot">
+          <label>Nama tempat<input id="map-name" maxlength="140" placeholder="Museum Seni"></label>
+          <p class="muted">Klik peta atau seret pin. Koordinat: <strong id="map-coords">belum dipilih</strong></p>
+          <button id="map-confirm" class="button primary" type="button">Pakai lokasi ini</button>
+        </div>
+      </div>
+    </div>
+      <div id="chat-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-label="Pilih bubble WhatsApp">
+        <div class="modal-box">
+          <div class="section-heading"><h2>Pilih bubble WhatsApp</h2><button id="chat-pick-cancel" class="button secondary small" type="button">Batal</button></div>
+          <label>Chat<select id="chat-pick-chat"></select></label>
+          <div id="chat-pick-list" class="chat-pick-list"></div>
+          <div class="form-actions">
+            <button id="chat-pick-all" class="button secondary small" type="button">Pilih / batal semua</button>
+            <button id="chat-pick-add" class="button primary" type="button">Tambahkan ke bab</button>
+          </div>
+        </div>
+      </div>
+    <div id="toast" class="toast" role="status"></div>
+  </div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
